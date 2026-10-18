@@ -1,0 +1,3 @@
+[submodule "demotiles"]
+	path = demotiles
+	url = https://github.com/maplibre/demotiles.git
