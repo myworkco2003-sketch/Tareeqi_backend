@@ -8,7 +8,7 @@ class Waypoint(BaseModel):
 
 class BusCreateRequest(BaseModel):
     name: str = Field(min_length=1, max_length=150)
-    color: str | None = Field(default=None, pattern=r"^#[0-9A-Fa-f]{6}$")
+    color: str | None = Field(default=None, max_length=30)
     old_price: float | None = Field(default=None, ge=0)
     new_price: float | None = Field(default=None, ge=0)
     is_active: bool = True
@@ -16,7 +16,7 @@ class BusCreateRequest(BaseModel):
 
 class BusUpdateRequest(BaseModel):
     name: str | None = Field(default=None, min_length=1, max_length=150)
-    color: str | None = Field(default=None, pattern=r"^#[0-9A-Fa-f]{6}$")
+    color: str | None = Field(default=None, max_length=30)
     old_price: float | None = Field(default=None, ge=0)
     new_price: float | None = Field(default=None, ge=0)
     is_active: bool | None = None
@@ -36,8 +36,8 @@ class RouteSaveRequest(BaseModel):
     direction: str = Field(min_length=1, max_length=50)
     is_active: bool = True
     geometry: dict
-    distance_m: float = Field(ge=0)
-    duration_minutes: float = Field(ge=0)
+    distance: float = Field(ge=0)
+    trip_time: float = Field(ge=0)
     start_point: Waypoint | None = None
     end_point: Waypoint | None = None
 
