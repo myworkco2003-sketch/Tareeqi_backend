@@ -1,4 +1,3 @@
-from datetime import datetime
 from decimal import Decimal
 
 from geoalchemy2 import Geometry
@@ -6,13 +5,11 @@ from sqlalchemy import (
     BigInteger,
     Boolean,
     CheckConstraint,
-    DateTime,
     ForeignKey,
     Integer,
     Numeric,
     String,
     UniqueConstraint,
-    func,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -33,18 +30,24 @@ class Bus(Base):
         Boolean, nullable=False, default=True, server_default="true"
     )
 
-    routes: Mapped[list["BusRoute"]] = relationship(
-        back_populates="bus", cascade="all, delete-orphan"
-    )
+    routes: Mapped[list["BusRoute"]] = relationship(back_populates="bus")
 
 
 class BusRoute(Base):
     __tablename__ = "bus_route"
     __table_args__ = (
-        UniqueConstraint("busID", "direction", "version", name="uq_bus_route_version"),
+        UniqueConstraint(
+            "busID", "direction", "version", name="uq_bus_route_version"
+        ),
         CheckConstraint("version >= 1", name="ck_bus_route_version_positive"),
-        CheckConstraint('"tripTime" IS NULL OR "tripTime" >= 0', name="ck_bus_route_trip_time_nonnegative"),
-        CheckConstraint("distance IS NULL OR distance >= 0", name="ck_bus_route_distance_nonnegative"),
+        CheckConstraint(
+            '"tripTime" IS NULL OR "tripTime" >= 0',
+            name="ck_bus_route_trip_time_nonnegative",
+        ),
+        CheckConstraint(
+            "distance IS NULL OR distance >= 0",
+            name="ck_bus_route_distance_nonnegative",
+        ),
     )
 
     uniqueID: Mapped[int] = mapped_column(
@@ -63,11 +66,22 @@ class BusRoute(Base):
         Geometry(geometry_type="LINESTRING", srid=4326),
         nullable=False,
     )
-    distance: Mapped[Decimal | None] = mapped_column(Numeric(12, 2), nullable=True)
+    distance: Mapped[Decimal | None] = mapped_column(
+        Numeric(12, 2), nullable=True
+    )
+    # tripTime is stored as whole minutes.
     tripTime: Mapped[int | None] = mapped_column(Integer, nullable=True)
     direction: Mapped[str] = mapped_column(String(50), nullable=False)
-    startPoint = mapped_column("startPoint", Geometry(geometry_type="POINT", srid=4326), nullable=True)
-    endPoint = mapped_column("endPoint", Geometry(geometry_type="POINT", srid=4326), nullable=True)
+    startPoint = mapped_column(
+        "startPoint",
+        Geometry(geometry_type="POINT", srid=4326),
+        nullable=True,
+    )
+    endPoint = mapped_column(
+        "endPoint",
+        Geometry(geometry_type="POINT", srid=4326),
+        nullable=True,
+    )
     isActive: Mapped[bool] = mapped_column(
         Boolean, nullable=False, default=True, server_default="true"
     )
