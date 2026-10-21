@@ -1,41 +1,40 @@
--- Run this file once against the Tareeqi PostgreSQL database.
--- Requires PostGIS. Existing legacy tables are intentionally not dropped.
+-- BUS / BUS_ROUTE schema matching the actual PostgreSQL column names.
+-- Run on a new database. Existing legacy tables are not dropped.
 
 CREATE EXTENSION IF NOT EXISTS postgis;
 
 CREATE TABLE IF NOT EXISTS public.bus (
-    "uniqueID" BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     color VARCHAR(30),
-    "oldPrice" NUMERIC(10, 2),
-    "newPrice" NUMERIC(10, 2),
-    "isActive" BOOLEAN NOT NULL DEFAULT TRUE
+    old_price NUMERIC(10, 2),
+    new_price NUMERIC(10, 2),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS public.bus_route (
-    "uniqueID" BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "busID" BIGINT NOT NULL
-        REFERENCES public.bus ("uniqueID") ON DELETE CASCADE,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    bus_id BIGINT NOT NULL REFERENCES public.bus (id) ON DELETE CASCADE,
     version INTEGER NOT NULL DEFAULT 1,
-    "lineString" geometry(LineString, 4326) NOT NULL,
-    distance NUMERIC(12, 2),
-    "tripTime" INTEGER,
+    line_string geometry(LineString, 4326) NOT NULL,
+    distance NUMERIC(10, 2),
+    trip_time INTEGER,
     direction VARCHAR(50) NOT NULL,
-    "startPoint" geometry(Point, 4326),
-    "endPoint" geometry(Point, 4326),
-    "isActive" BOOLEAN NOT NULL DEFAULT TRUE,
-    CONSTRAINT uq_bus_route_version UNIQUE ("busID", direction, version),
+    start_point geometry(Point, 4326),
+    end_point geometry(Point, 4326),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT uq_bus_route_version UNIQUE (bus_id, direction, version),
     CONSTRAINT ck_bus_route_version_positive CHECK (version >= 1),
-    CONSTRAINT ck_bus_route_trip_time_nonnegative CHECK ("tripTime" IS NULL OR "tripTime" >= 0),
+    CONSTRAINT ck_bus_route_trip_time_nonnegative CHECK (trip_time IS NULL OR trip_time >= 0),
     CONSTRAINT ck_bus_route_distance_nonnegative CHECK (distance IS NULL OR distance >= 0)
 );
 
 CREATE INDEX IF NOT EXISTS ix_bus_route_bus_id
-    ON public.bus_route ("busID");
+    ON public.bus_route (bus_id);
 
 CREATE INDEX IF NOT EXISTS ix_bus_route_active
-    ON public.bus_route ("busID", direction, version DESC)
-    WHERE "isActive" = TRUE;
+    ON public.bus_route (bus_id, direction, version DESC)
+    WHERE is_active = TRUE;
 
 CREATE OR REPLACE FUNCTION public.set_bus_route_version()
 RETURNS TRIGGER
@@ -43,17 +42,17 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
     latest_version INTEGER;
-    latest_geometry geometry(LineString, 4326);
+    latest_line geometry(LineString, 4326);
 BEGIN
-    -- Serialize inserts for this bus and direction.
+    -- Serialize concurrent inserts for the same bus and direction.
     PERFORM pg_advisory_xact_lock(
-        hashtextextended(NEW."busID"::text || ':' || NEW.direction, 0)
+        hashtextextended(NEW.bus_id::text || ':' || NEW.direction, 0)
     );
 
-    SELECT br.version, br."lineString"
-      INTO latest_version, latest_geometry
+    SELECT br.version, br.line_string
+      INTO latest_version, latest_line
       FROM public.bus_route AS br
-     WHERE br."busID" = NEW."busID"
+     WHERE br.bus_id = NEW.bus_id
        AND br.direction = NEW.direction
      ORDER BY br.version DESC
      LIMIT 1;
@@ -63,22 +62,22 @@ BEGIN
         RETURN NEW;
     END IF;
 
-    IF ST_AsEWKB(NEW."lineString") = ST_AsEWKB(latest_geometry) THEN
+    IF ST_AsEWKB(NEW.line_string) = ST_AsEWKB(latest_line) THEN
         RAISE EXCEPTION
-            'LineString unchanged for bus % and direction %; update the existing version instead',
-            NEW."busID", NEW.direction
+            'line_string unchanged for bus_id % and direction %; no new version created',
+            NEW.bus_id, NEW.direction
             USING ERRCODE = '23505';
     END IF;
 
     NEW.version := latest_version + 1;
 
-    -- An inactive draft must not deactivate the currently published version.
-    IF NEW."isActive" THEN
+    -- Preserve the currently published version if this new row is inactive.
+    IF NEW.is_active THEN
         UPDATE public.bus_route
-           SET "isActive" = FALSE
-         WHERE "busID" = NEW."busID"
+           SET is_active = FALSE
+         WHERE bus_id = NEW.bus_id
            AND direction = NEW.direction
-           AND "isActive" = TRUE;
+           AND is_active = TRUE;
     END IF;
 
     RETURN NEW;
