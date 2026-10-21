@@ -72,12 +72,14 @@ BEGIN
 
     NEW.version := latest_version + 1;
 
-    -- Only the newest version for this bus/direction is active.
-    UPDATE public.bus_route
-       SET "isActive" = FALSE
-     WHERE "busID" = NEW."busID"
-       AND direction = NEW.direction
-       AND "isActive" = TRUE;
+    -- An inactive draft must not deactivate the currently published version.
+    IF NEW."isActive" THEN
+        UPDATE public.bus_route
+           SET "isActive" = FALSE
+         WHERE "busID" = NEW."busID"
+           AND direction = NEW.direction
+           AND "isActive" = TRUE;
+    END IF;
 
     RETURN NEW;
 END;
