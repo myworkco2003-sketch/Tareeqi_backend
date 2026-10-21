@@ -30,11 +30,25 @@ def _point_wkt(point: dict | None, fallback: list[float]) -> str:
     return f"POINT({lon} {lat})"
 
 
-def _geometry_json(db: Session, route_id: int):
+def _bump_dataset_version(db: Session) -> None:
+    # Keep the existing mobile delta-sync contract intact.
+    db.execute(
+        text(
+            "UPDATE dataset_version "
+            "SET version = version + 1, updated_at = now() "
+            "WHERE id = 1"
+        )
+    )
+
+
+def _geometry_json(db: Session, route_id: int, column: str):
+    # column is chosen only from this fixed internal allowlist.
+    if column not in {"line_string", "start_point", "end_point"}:
+        raise ValueError("Unsupported geometry column")
     return db.execute(
         text(
-            'SELECT ST_AsGeoJSON("lineString")::json '
-            'FROM public.bus_route WHERE "uniqueID" = :route_id'
+            f'SELECT ST_AsGeoJSON("{column}")::json '
+            'FROM public.bus_route WHERE id = :route_id'
         ),
         {"route_id": route_id},
     ).scalar()
@@ -42,40 +56,28 @@ def _geometry_json(db: Session, route_id: int):
 
 def _bus_payload(bus: Bus) -> dict:
     return {
-        "uniqueID": bus.uniqueID,
+        "id": bus.id,
         "name": bus.name,
         "color": bus.color,
-        "oldPrice": float(bus.oldPrice) if bus.oldPrice is not None else None,
-        "newPrice": float(bus.newPrice) if bus.newPrice is not None else None,
-        "isActive": bus.isActive,
+        "old_price": float(bus.old_price) if bus.old_price is not None else None,
+        "new_price": float(bus.new_price) if bus.new_price is not None else None,
+        "is_active": bus.is_active,
     }
 
 
 def _route_payload(db: Session, route: BusRoute, bus: Bus) -> dict:
     return {
-        "uniqueID": route.uniqueID,
-        "busID": route.busID,
+        "id": route.id,
+        "bus_id": route.bus_id,
         "bus": _bus_payload(bus),
         "version": route.version,
-        "lineString": _geometry_json(db, route.uniqueID),
+        "line_string": _geometry_json(db, route.id, "line_string"),
         "distance": float(route.distance) if route.distance is not None else None,
-        "tripTime": route.tripTime,
+        "trip_time": route.trip_time,
         "direction": route.direction,
-        "startPoint": db.execute(
-            text(
-                'SELECT ST_AsGeoJSON("startPoint")::json '
-                'FROM public.bus_route WHERE "uniqueID" = :route_id'
-            ),
-            {"route_id": route.uniqueID},
-        ).scalar(),
-        "endPoint": db.execute(
-            text(
-                'SELECT ST_AsGeoJSON("endPoint")::json '
-                'FROM public.bus_route WHERE "uniqueID" = :route_id'
-            ),
-            {"route_id": route.uniqueID},
-        ).scalar(),
-        "isActive": route.isActive,
+        "start_point": _geometry_json(db, route.id, "start_point"),
+        "end_point": _geometry_json(db, route.id, "end_point"),
+        "is_active": route.is_active,
     }
 
 
@@ -83,8 +85,10 @@ def _route_payload(db: Session, route: BusRoute, bus: Bus) -> dict:
 
 @router.get("/buses")
 def list_buses(db: Session = Depends(get_db)):
-    buses = db.query(Bus).order_by(Bus.uniqueID).all()
-    return [_bus_payload(bus) for bus in buses]
+    return [
+        _bus_payload(bus)
+        for bus in db.query(Bus).order_by(Bus.id).all()
+    ]
 
 
 @router.post("/buses", status_code=201)
@@ -92,11 +96,13 @@ def create_bus(request: BusCreateRequest, db: Session = Depends(get_db)):
     bus = Bus(
         name=request.name.strip(),
         color=request.color,
-        oldPrice=request.old_price,
-        newPrice=request.new_price,
-        isActive=request.is_active,
+        old_price=request.old_price,
+        new_price=request.new_price,
+        is_active=request.is_active,
     )
     db.add(bus)
+    db.flush()
+    _bump_dataset_version(db)
     db.commit()
     db.refresh(bus)
     return _bus_payload(bus)
@@ -104,7 +110,7 @@ def create_bus(request: BusCreateRequest, db: Session = Depends(get_db)):
 
 @router.get("/buses/{bus_id}")
 def get_bus(bus_id: int, db: Session = Depends(get_db)):
-    bus = db.query(Bus).filter(Bus.uniqueID == bus_id).first()
+    bus = db.query(Bus).filter(Bus.id == bus_id).first()
     if bus is None:
         raise HTTPException(status_code=404, detail="Bus not found")
     return _bus_payload(bus)
@@ -112,26 +118,18 @@ def get_bus(bus_id: int, db: Session = Depends(get_db)):
 
 @router.patch("/buses/{bus_id}")
 def update_bus(bus_id: int, request: BusUpdateRequest, db: Session = Depends(get_db)):
-    bus = (
-        db.query(Bus)
-        .filter(Bus.uniqueID == bus_id)
-        .with_for_update()
-        .first()
-    )
+    bus = db.query(Bus).filter(Bus.id == bus_id).with_for_update().first()
     if bus is None:
         raise HTTPException(status_code=404, detail="Bus not found")
 
-    values = request.model_dump(exclude_unset=True)
-    field_map = {
-        "name": "name",
-        "color": "color",
-        "old_price": "oldPrice",
-        "new_price": "newPrice",
-        "is_active": "isActive",
-    }
-    for key, value in values.items():
-        setattr(bus, field_map[key], value.strip() if key == "name" and value else value)
+    for key, value in request.model_dump(exclude_unset=True).items():
+        if key == "name" and value is not None:
+            value = value.strip()
+            if not value:
+                raise HTTPException(status_code=422, detail="Bus name cannot be empty")
+        setattr(bus, key, value)
 
+    _bump_dataset_version(db)
     db.commit()
     db.refresh(bus)
     return _bus_payload(bus)
@@ -146,16 +144,16 @@ def list_routes(
     include_inactive: bool = True,
     db: Session = Depends(get_db),
 ):
-    query = db.query(BusRoute, Bus).join(Bus, Bus.uniqueID == BusRoute.busID)
+    query = db.query(BusRoute, Bus).join(Bus, Bus.id == BusRoute.bus_id)
     if bus_id is not None:
-        query = query.filter(BusRoute.busID == bus_id)
+        query = query.filter(BusRoute.bus_id == bus_id)
     if direction is not None:
         query = query.filter(BusRoute.direction == direction)
     if not include_inactive:
-        query = query.filter(BusRoute.isActive.is_(True), Bus.isActive.is_(True))
+        query = query.filter(BusRoute.is_active.is_(True), Bus.is_active.is_(True))
 
     rows = query.order_by(
-        BusRoute.busID, BusRoute.direction, BusRoute.version.desc()
+        BusRoute.bus_id, BusRoute.direction, BusRoute.version.desc()
     ).all()
     return [_route_payload(db, route, bus) for route, bus in rows]
 
@@ -164,76 +162,78 @@ def list_routes(
 def list_active_routes_for_map(db: Session = Depends(get_db)):
     rows = (
         db.query(BusRoute, Bus)
-        .join(Bus, Bus.uniqueID == BusRoute.busID)
-        .filter(BusRoute.isActive.is_(True), Bus.isActive.is_(True))
-        .order_by(BusRoute.busID, BusRoute.direction)
+        .join(Bus, Bus.id == BusRoute.bus_id)
+        .filter(BusRoute.is_active.is_(True), Bus.is_active.is_(True))
+        .order_by(BusRoute.bus_id, BusRoute.direction)
         .all()
     )
     return [_route_payload(db, route, bus) for route, bus in rows]
 
 
-@router.post("/routes/preview")
-def preview_route(request: RoutePreviewRequest):
-    waypoints = [(point.lon, point.lat) for point in request.waypoints]
+def _brouter_result(waypoints: list[tuple[float, float]]) -> dict:
     response = calculate_route(waypoints)
-    feature = response["features"][0]
+    features = response.get("features") or []
+    if not features:
+        raise HTTPException(status_code=502, detail="BRouter returned no route")
+    feature = features[0]
+    geometry = feature.get("geometry") or {}
+    coordinates = geometry.get("coordinates")
+    if geometry.get("type") != "LineString" or not isinstance(coordinates, list) or len(coordinates) < 2:
+        raise HTTPException(status_code=502, detail="BRouter returned invalid LineString")
+
     properties = feature.get("properties") or {}
+    distance = float(properties.get("track-length", 0))
     duration_seconds = float(properties.get("total-time", 0))
     return {
-        "geometry": feature["geometry"],
-        "distance": float(properties.get("track-length", 0)),
-        "tripTime": duration_seconds / 60,
+        "geometry": geometry,
+        "distance": distance,
+        "trip_time": round(duration_seconds / 60),
         "duration_seconds": duration_seconds,
+        "duration_minutes": duration_seconds / 60,
     }
+
+
+@router.post("/routes/preview")
+def preview_route(request: RoutePreviewRequest):
+    return _brouter_result([(point.lon, point.lat) for point in request.waypoints])
 
 
 @router.post("/routes/brouter-waypoints")
 def brouter_waypoints(request: BRouterWaypointsRequest):
-    waypoints = [(point.lon, point.lat) for point in request.waypoints]
-    response = calculate_route(waypoints)
-    feature = response["features"][0]
-    properties = feature.get("properties") or {}
-    duration_seconds = float(properties.get("total-time", 0))
+    result = _brouter_result([(point.lon, point.lat) for point in request.waypoints])
     return {
-        "geometry": feature["geometry"],
-        "distance": float(properties.get("track-length", 0)),
-        "tripTime": duration_seconds / 60,
+        "route_name": request.route_name,
+        **result,
     }
 
 
 def _save_route(request: RouteSaveRequest, db: Session, route_id: int | None = None):
-    bus = (
-        db.query(Bus)
-        .filter(Bus.uniqueID == request.bus_id)
-        .with_for_update()
-        .first()
-    )
+    bus = db.query(Bus).filter(Bus.id == request.bus_id).with_for_update().first()
     if bus is None:
         raise HTTPException(status_code=404, detail="Bus not found")
 
-    lock_key = f"bus-route:{request.bus_id}:{request.direction}"
     db.execute(
         text("SELECT pg_advisory_xact_lock(hashtextextended(:lock_key, 0))"),
-        {"lock_key": lock_key},
+        {"lock_key": f"bus-route:{request.bus_id}:{request.direction}"},
     )
 
     current = None
     if route_id is not None:
         current = (
             db.query(BusRoute)
-            .filter(BusRoute.uniqueID == route_id)
+            .filter(BusRoute.id == route_id)
             .with_for_update()
             .first()
         )
         if current is None:
             raise HTTPException(status_code=404, detail="Bus route not found")
-        if current.busID != request.bus_id:
-            raise HTTPException(status_code=422, detail="bus_id cannot be changed for an existing route")
+        if current.bus_id != request.bus_id:
+            raise HTTPException(status_code=422, detail="bus_id cannot change for an existing route")
 
     latest = (
         db.query(BusRoute)
         .filter(
-            BusRoute.busID == request.bus_id,
+            BusRoute.bus_id == request.bus_id,
             BusRoute.direction == request.direction,
         )
         .order_by(BusRoute.version.desc())
@@ -255,41 +255,39 @@ def _save_route(request: RouteSaveRequest, db: Session, route_id: int | None = N
     if latest is not None:
         same_geometry = db.execute(
             text(
-                'SELECT ST_AsEWKB("lineString") = '
+                'SELECT ST_AsEWKB("line_string") = '
                 'ST_AsEWKB(ST_GeomFromText(:line_wkt, 4326)) '
-                'FROM public.bus_route WHERE "uniqueID" = :route_id'
+                'FROM public.bus_route WHERE id = :route_id'
             ),
-            {"line_wkt": line_wkt, "route_id": latest.uniqueID},
+            {"line_wkt": line_wkt, "route_id": latest.id},
         ).scalar()
 
         if same_geometry:
-            latest.distance = request.distance_m
-            latest.tripTime = round(request.duration_minutes)
-            latest.startPoint = WKTElement(start_wkt, srid=4326)
-            latest.endPoint = WKTElement(end_wkt, srid=4326)
-            latest.isActive = request.is_active
+            latest.distance = request.distance
+            latest.trip_time = round(request.trip_time)
+            latest.start_point = WKTElement(start_wkt, srid=4326)
+            latest.end_point = WKTElement(end_wkt, srid=4326)
+            latest.is_active = request.is_active
+            _bump_dataset_version(db)
             db.commit()
             db.refresh(latest)
             return _route_payload(db, latest, bus)
 
-    # The database trigger assigns version and deactivates the prior version.
+    # Database trigger sets version from bus_id + direction + line_string.
     route = BusRoute(
-        busID=request.bus_id,
+        bus_id=request.bus_id,
         direction=request.direction,
-        lineString=WKTElement(line_wkt, srid=4326),
-        distance=request.distance_m,
-        tripTime=round(request.duration_minutes),
-        startPoint=WKTElement(start_wkt, srid=4326),
-        endPoint=WKTElement(end_wkt, srid=4326),
-        isActive=request.is_active,
+        line_string=WKTElement(line_wkt, srid=4326),
+        distance=request.distance,
+        trip_time=round(request.trip_time),
+        start_point=WKTElement(start_wkt, srid=4326),
+        end_point=WKTElement(end_wkt, srid=4326),
+        is_active=request.is_active,
     )
     db.add(route)
     db.flush()
 
-    # If an old row was explicitly edited, preserve it in history but mark inactive.
-    if current is not None and current.uniqueID != route.uniqueID:
-        current.isActive = False
-
+    _bump_dataset_version(db)
     db.commit()
     db.refresh(route)
     return _route_payload(db, route, bus)
@@ -307,15 +305,10 @@ def update_route(route_id: int, request: RouteSaveRequest, db: Session = Depends
 
 @router.delete("/routes/{route_id}")
 def deactivate_route(route_id: int, db: Session = Depends(get_db)):
-    route = (
-        db.query(BusRoute)
-        .filter(BusRoute.uniqueID == route_id)
-        .with_for_update()
-        .first()
-    )
+    route = db.query(BusRoute).filter(BusRoute.id == route_id).with_for_update().first()
     if route is None:
         raise HTTPException(status_code=404, detail="Bus route not found")
-
-    route.isActive = False
+    route.is_active = False
+    _bump_dataset_version(db)
     db.commit()
-    return {"uniqueID": route.uniqueID, "isActive": False}
+    return {"id": route.id, "is_active": False}
