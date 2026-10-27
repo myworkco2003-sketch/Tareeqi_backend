@@ -1,0 +1,19 @@
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+*.log
+.env
+docs/
+
+# Data fixtures and sample POIs (keep local, do not push to git)
+data/*fixture*.json
+data/*places*.json
+data/samples/
+*.dump
+*.sql
+
+# One-off scripts and temporary tools (keep local, do not push to git)
+places/management/commands/seed_categories.py
+*.bak
