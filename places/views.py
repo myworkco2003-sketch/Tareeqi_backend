@@ -8,6 +8,7 @@ from .models import (
     AdminArea, Street, Category, SubCategory, Place, PlaceMedia, Notification,
     Bus, BusRoute
 )
+from .contacts import serialize_contact, sector_label
 from .text_utils import normalize_arabic, generate_search_variants
 
 
@@ -95,7 +96,6 @@ def list_categories(request):
                     "name_ar": sub.name_ar,
                     "icon": sub.effective_icon,
                     "color": sub.effective_color,
-                    "is_private": sub.is_private,
                 }
                 for sub in cat.subcategories.all()
             ]
@@ -135,7 +135,7 @@ def list_places_geojson(request):
     # single request serialise the entire table.
     limit = max(1, min(limit, 5000))
 
-    queryset = Place.objects.filter(is_visible=True, latitude__isnull=False, longitude__isnull=False).select_related('sub_category__category', 'admin_area')
+    queryset = Place.objects.filter(is_visible=True, latitude__isnull=False, longitude__isnull=False).select_related('sub_category__category', 'admin_area').prefetch_related('communication_info')
 
     # منع التكرار الكارتوغرافي: استبعاد المعالم الدائمة التي تعرضها طبقة landmarks مسبقاً
     if not include_permanent:
@@ -161,6 +161,7 @@ def list_places_geojson(request):
 
     features = []
     for p in queryset:
+        contact = serialize_contact(p)
         features.append({
             "type": "Feature",
             "id": p.id,
@@ -170,7 +171,7 @@ def list_places_geojson(request):
             },
             "properties": {
                 "id": p.id,
-                "title": p.title,
+                "title": p.title_ar,
                 "title_en": p.title_en,
                 "category_slug": p.category.slug if p.category else "",
                 "category_name": p.category.name_ar if p.category else "",
@@ -180,13 +181,13 @@ def list_places_geojson(request):
                 "sub_category_name": p.sub_category.name_ar if p.sub_category else "",
                 "sub_category_icon": p.sub_category.effective_icon if p.sub_category else "map-pin",
                 "sub_category_color": p.sub_category.effective_color if p.sub_category else "#064239",
-                "sector": p.sector,
-                "sector_label": p.get_sector_display(),
+                "sector": p.sector.lower(),
+                "sector_label": sector_label(p.sector),
                 "admin_area_name": p.admin_area.name_ar if p.admin_area else "",
-                "phone": p.phone,
-                "mobile": p.mobile,
-                "short_number": p.short_number,
-                "whatsapp": p.whatsapp,
+                "phone": contact["phone"],
+                "mobile": contact["mobile"],
+                "short_number": contact["short_number"],
+                "whatsapp": contact["whatsapp"],
                 "is_verified": p.is_verified,
             }
         })
@@ -204,7 +205,7 @@ def get_place_detail(request, place_id):
     إرجاع التفاصيل الكاملة لمكان محدد لعرضها في بطاقة المنشأة (Market Card)
     """
     try:
-        p = Place.objects.select_related('sub_category__category', 'admin_area__parent').prefetch_related('media').get(id=place_id)
+        p = Place.objects.select_related('sub_category__category', 'admin_area__parent').prefetch_related('media', 'communication_info').get(id=place_id)
     except Place.DoesNotExist:
         raise Http404("المكان غير موجود")
 
@@ -224,11 +225,11 @@ def get_place_detail(request, place_id):
 
     return JsonResponse({
         "id": p.id,
-        "title": p.title,
+        "title": p.title_ar,
         "title_en": p.title_en,
         "description": p.description,
-        "sector": p.sector,
-        "sector_label": p.get_sector_display(),
+        "sector": p.sector.lower(),
+        "sector_label": sector_label(p.sector),
         "category": {
             "id": p.category.id if p.category else None,
             "name_ar": p.category.name_ar if p.category else "",
@@ -240,7 +241,6 @@ def get_place_detail(request, place_id):
             "name_ar": p.sub_category.name_ar if p.sub_category else "",
             "icon": p.sub_category.effective_icon if p.sub_category else "map-pin",
             "color": p.sub_category.effective_color if p.sub_category else "#064239",
-            "is_private": p.sub_category.is_private if p.sub_category else False,
         },
         "location": {
             "latitude": p.latitude,
@@ -249,16 +249,8 @@ def get_place_detail(request, place_id):
             "neighborhood": neighborhood_name,
             "municipality": municipality_name,
         },
-        "contact": {
-            "phone": p.phone,
-            "mobile": p.mobile,
-            "short_number": p.short_number,
-            "whatsapp": p.whatsapp,
-            "email": p.email,
-            "website": p.website,
-            "social_media": p.social_media,
-            "opening_hours": p.opening_hours,
-        },
+        "contact": serialize_contact(p),
+        "communication_info": [{"type": c.type, "value": c.value} for c in p.communication_info.all()],
         "is_verified": p.is_verified,
         "media": media_list,
     })
@@ -397,7 +389,7 @@ def search_all(request):
         places.append({
             "type": "place",
             "id": p.id,
-            "title": p.title,
+            "title": p.title_ar,
             "subtitle": f"{p.category.name_ar if p.category else ''} • {p.admin_area.name_ar if p.admin_area else 'دمشق'}",
             "icon": p.category.icon if p.category else "map-pin",
             "color": p.category.color if p.category else "#064239",
@@ -543,7 +535,7 @@ def list_all_transit_routes_geojson(request):
     إرجاع كافة مسارات شبكة باصات وسرافيس دمشق بصيغة GeoJSON FeatureCollection واحدة
     لتتمكن خريطة MapLibre من عرضها كطبقة خطوط متجهة متكاملة وسريعة
     """
-    routes = BusRoute.objects.filter(is_active=True, bus_line__is_active=True).select_related('bus_line')
+    routes = BusRoute.objects.filter(is_active=True, bus__is_active=True).select_related('bus')
     features = []
     for r in routes:
         spec = getattr(r, 'specifications', None)
@@ -552,11 +544,11 @@ def list_all_transit_routes_geojson(request):
             "id": r.id,
             "properties": {
                 "route_id": r.id,
-                "line_id": r.bus_line.id,
-                "line_name": r.bus_line.name,
-                "line_code": r.bus_line.code,
+                "line_id": r.bus.id,
+                "line_name": r.bus.name,
+                "line_code": r.bus.code,
                 "direction": r.direction,
-                "color": r.bus_line.color or "#064239",
+                "color": r.bus.color or "#064239",
                 "cost": float(spec.cost) if spec else 500,
                 "length_km": spec.route_length_km if spec else 0,
                 "trip_time_mins": spec.trip_time_minutes if spec else 0,
@@ -578,7 +570,7 @@ def get_transit_route_geojson(request, route_id):
     إرجاع المسار الجغرافي لخط باص محدد بصيغة GeoJSON
     """
     try:
-        route = BusRoute.objects.select_related('bus_line').get(id=route_id)
+        route = BusRoute.objects.select_related('bus').get(id=route_id)
     except BusRoute.DoesNotExist:
         raise Http404("مسار الخط غير موجود")
 
@@ -589,10 +581,10 @@ def get_transit_route_geojson(request, route_id):
         "id": route.id,
         "properties": {
             "route_id": route.id,
-            "line_id": route.bus_line.id,
-            "line_name": route.bus_line.name,
+            "line_id": route.bus.id,
+            "line_name": route.bus.name,
             "direction": route.direction,
-            "color": route.bus_line.color,
+            "color": route.bus.color,
             "cost": float(spec.cost) if spec else 500,
             "length_km": spec.route_length_km if spec else 0,
             "trip_time_mins": spec.trip_time_minutes if spec else 0,
@@ -628,7 +620,7 @@ def calculate_route(request):
     # 1. وضع المواصلات العامة (Transit)
     if mode == 'transit':
         # البحث عن أقرب مسار باص من نقطة الانطلاق
-        all_routes = BusRoute.objects.filter(is_active=True, bus_line__is_active=True).select_related('bus_line')
+        all_routes = BusRoute.objects.filter(is_active=True, bus__is_active=True).select_related('bus')
         best_route = None
         min_combined_dist = 999999.0
 
@@ -654,19 +646,19 @@ def calculate_route(request):
             return JsonResponse({
                 "mode": "transit",
                 "mode_title": "مواصلات عامة (باص / سرفيس)",
-                "summary": f"باص {best_route.bus_line.name}",
-                "line_name": best_route.bus_line.name,
+                "summary": f"باص {best_route.bus.name}",
+                "line_name": best_route.bus.name,
                 "cost_syp": float(spec.cost) if spec else 500,
                 "total_distance_km": trip_km,
                 "duration_minutes": duration_mins,
                 "steps": [
                     {
-                        "instruction": f"سر مشياً مسافة {int(min_combined_dist * 400)}م إلى أقرب محطة صعود لسرفيس {best_route.bus_line.name}",
+                        "instruction": f"سر مشياً مسافة {int(min_combined_dist * 400)}م إلى أقرب محطة صعود لسرفيس {best_route.bus.name}",
                         "icon": "walk",
                         "duration_mins": 4,
                     },
                     {
-                        "instruction": f"اصعد سرفيس {best_route.bus_line.name} (التعرفة الرسمية: {int(spec.cost if spec else 500)} ل.س)",
+                        "instruction": f"اصعد سرفيس {best_route.bus.name} (التعرفة الرسمية: {int(spec.cost if spec else 500)} ل.س)",
                         "icon": "bus",
                         "duration_mins": duration_mins - 7,
                     },
@@ -802,6 +794,8 @@ def list_notifications(request):
     results = [
         {
             "id": n.id,
+            "title": n.title,
+            "expiration_date": n.expiration_date.isoformat(),
             "content": n.content,
             "urgency": n.urgency,
             "start_date": n.start_date.strftime("%Y-%m-%d %H:%M"),

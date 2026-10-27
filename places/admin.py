@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     AdminArea, Street, Category, SubCategory, Place, PlaceMedia,
-    Bus, BusRoute, Notification, Log
+    Bus, BusRoute, Notification, Log, CommunicationInfo
 )
 
 
@@ -34,12 +34,17 @@ class PlaceMediaInline(admin.TabularInline):
     extra = 1
 
 
+class CommunicationInfoInline(admin.TabularInline):
+    model = CommunicationInfo
+    extra = 1
+
+
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     list_display = ('title_ar', 'title_en', 'sub_category', 'sector', 'admin_area', 'is_verified', 'is_visible')
     list_filter = ('sector', 'sub_category__category', 'sub_category', 'is_verified', 'is_visible')
     search_fields = ('title_ar', 'title_en', 'description')
-    inlines = [PlaceMediaInline]
+    inlines = [CommunicationInfoInline, PlaceMediaInline]
     fieldsets = (
         ("المعلومات الأساسية", {
             "fields": ("title_ar", "title_en", "description", "sub_category", "sector", "admin_area")
@@ -48,7 +53,7 @@ class PlaceAdmin(admin.ModelAdmin):
             "fields": ("latitude", "longitude", "location_text")
         }),
         ("معلومات الاتصال (الهاتف، الموبايل، الواتساب)", {
-            "fields": ("phone", "mobile", "short_number", "whatsapp", "email", "website", "social_media", "opening_hours")
+            "fields": ("opening_hours",)
         }),
         ("التحكم وضبط الجودة", {
             "fields": ("is_verified", "is_visible")

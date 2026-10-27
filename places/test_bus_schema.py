@@ -11,14 +11,14 @@ class BusSchemaTests(TestCase):
         self.bus = Bus.objects.create(name='Test line', color='#123456', old_price=500, new_price=750)
         self.geometry = {'type': 'LineString', 'coordinates': [[36.28, 33.51], [36.30, 33.52]]}
         self.route = BusRoute.objects.create(
-            bus_line=self.bus, geometry=self.geometry, direction='outbound',
+            bus=self.bus, geometry=self.geometry, direction='outbound', is_active=True,
             distance=12500, trip_time=35, start_point='Start district', end_point='End district',
         )
 
     def test_exactly_two_tables_with_requested_columns(self):
         expected = {
-            'BUS': {'UniqueID', 'name', 'color', 'oldPrice', 'newPrice', 'isActive'},
-            'BUS_ROUTE': {'UniqueID', 'busID', 'version', 'lineString', 'distance', 'tripTime', 'direction', 'startPoint', 'endPoint', 'isActive'},
+            'buses': {'id', 'name', 'color', 'old_price', 'new_price', 'is_active'},
+            'bus_routes': {'id', 'bus_id', 'version', 'lineString', 'distance', 'trip_time', 'direction', 'start_point', 'end_point', 'is_active'},
         }
         tables = connection.introspection.table_names()
         for name in ['places_Bus', 'places_busroute', 'places_busstop', 'places_busstop_routes', 'places_routespecification']:
@@ -38,8 +38,8 @@ class BusSchemaTests(TestCase):
         self.assertEqual(self.route.start_point, 'Start district')
 
     def test_history_and_reactivation_per_direction(self):
-        inbound = BusRoute.objects.create(bus_line=self.bus, geometry=self.geometry, direction='inbound')
-        replacement = BusRoute.objects.create(bus_line=self.bus, geometry=self.geometry, direction='outbound', version=2, is_active=False)
+        inbound = BusRoute.objects.create(bus=self.bus, geometry=self.geometry, direction='inbound', is_active=True)
+        replacement = BusRoute.objects.create(bus=self.bus, geometry=self.geometry, direction='outbound', version=2, is_active=False)
         with self.assertRaises(IntegrityError), transaction.atomic():
             BusRoute.objects.filter(pk=replacement.pk).update(is_active=True)
         self.route.is_active = False
@@ -54,7 +54,7 @@ class BusSchemaTests(TestCase):
         inbound.refresh_from_db()
         self.assertTrue(inbound.is_active)
         with self.assertRaises(IntegrityError), transaction.atomic():
-            BusRoute.objects.create(bus_line=self.bus, geometry=self.geometry, direction='outbound', version=1, is_active=False)
+            BusRoute.objects.create(bus=self.bus, geometry=self.geometry, direction='outbound', version=1, is_active=False)
 
     def test_existing_endpoints_read_new_tables(self):
         line = self.client.get('/api/transit/lines/').json()['results'][0]
@@ -73,8 +73,8 @@ class BusSchemaTests(TestCase):
 
     def test_both_directions_have_independent_geometry_and_terminals(self):
         return_geometry = {'type': 'LineString', 'coordinates': [[36.30, 33.52], [36.32, 33.53], [36.28, 33.51]]}
-        inbound = BusRoute.objects.create(bus_line=self.bus, geometry=return_geometry,
-            direction='inbound', start_point='End district', end_point='Start district', trip_time=30)
+        inbound = BusRoute.objects.create(bus=self.bus, geometry=return_geometry,
+            direction='inbound', is_active=True, start_point='End district', end_point='Start district', trip_time=30)
         routes = self.client.get('/api/transit/lines/').json()['results'][0]['routes']
         self.assertEqual(len(routes), 2)
         self.assertEqual(routes[0]['geometry'], self.geometry)

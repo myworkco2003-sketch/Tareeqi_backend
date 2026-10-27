@@ -42,7 +42,7 @@ class Command(BaseCommand):
             if row['direction'] == 'inbound':
                 start, end = end, start
             route = BusRoute(
-                id=row['id'], bus_line_id=row['bus_id'], version=row['version'],
+                id=row['id'], bus_id=row['bus_id'], version=row['version'],
                 geometry=row['geometry'], distance=row['distance'],
                 trip_time=options['minutes'][row['id']-1], direction=row['direction'],
                 start_point=start, end_point=end, is_active=row['is_active'],

@@ -1,6 +1,7 @@
+from places.contacts import save_contact_values
 from django.test import TestCase, Client
 from django.urls import reverse
-from places.models import AdminArea, Street, Category, PlaceSubCategory, Place
+from places.models import AdminArea, Street, Category, SubCategory, Place
 
 
 class DamascusPlacesModelAndApiTests(TestCase):
@@ -25,6 +26,7 @@ class DamascusPlacesModelAndApiTests(TestCase):
         )
 
         # 2. إنشاء تصنيف وتصنيف فرعي
+        Category.objects.filter(slug='healthcare').delete()
         self.category = Category.objects.create(
             name_ar="القطاع الصحي والمشافي",
             name_en="Healthcare",
@@ -34,25 +36,29 @@ class DamascusPlacesModelAndApiTests(TestCase):
             is_active=True,
             sort_order=1
         )
-        self.sub_category = PlaceSubCategory.objects.create(
+        self.sub_category = SubCategory.objects.create(
             category=self.category,
             name_ar="مشفى حكومي",
             name_en="Public Hospital",
             slug="public-hospital",
-            is_private=False
         )
 
         # 3. إنشاء منشأة تجريبية (Place) بكافة حقول الاتصال الجديدة والقطاع
         self.place = Place.objects.create(
-            title="مشفى المواساة الجامعي",
+            title_ar="مشفى المواساة الجامعي",
             title_en="Al-Mouwasat University Hospital",
             description="مشفى تعليمي حكومي رائد في دمشق",
             sub_category=self.sub_category,
             admin_area=self.neighborhood,
-            sector=Place.Sector.PUBLIC,
+            sector='Public',
             latitude=33.5123,
             longitude=36.2712,
             location_text="دمشق - المزة",
+            is_verified=True,
+            is_visible=True
+        )
+
+        save_contact_values(self.place,
             phone="011-2133000",
             mobile="0991000000",
             short_number="115",
@@ -60,8 +66,6 @@ class DamascusPlacesModelAndApiTests(TestCase):
             email="info@mouwasat-hospital.sy",
             website="https://mouwasat-hospital.sy",
             social_media={"facebook": "https://facebook.com/mouwasat"},
-            is_verified=True,
-            is_visible=True
         )
 
         # 4. إنشاء شارع تجريبي (Street)
@@ -123,7 +127,7 @@ class DamascusPlacesModelAndApiTests(TestCase):
         data = response.json()
         slugs = [c["slug"] for c in data["results"]]
         self.assertIn("healthcare", slugs)
-        self.assertIn("religious", slugs)
+        self.assertEqual(slugs, ["healthcare"])
         healthcare = next(c for c in data["results"] if c["slug"] == "healthcare")
         self.assertEqual(healthcare["places_count"], 1)
 
@@ -165,6 +169,28 @@ class DamascusPlacesModelAndApiTests(TestCase):
         """فحص إرجاع 404 عند طلب مكان غير موجود"""
         response = self.client.get(reverse('place_detail', args=[99999]))
         self.assertEqual(response.status_code, 404)
+
+    def test_multiple_contacts_are_preserved(self):
+        save_contact_values(self.place, phone="011-2222222", telegram="https://t.me/example")
+        response = self.client.get(reverse('place_detail', args=[self.place.id]))
+        data = response.json()
+        self.assertIn({'type': 'phone', 'value': '011-2222222'}, data['communication_info'])
+        self.assertEqual(data['contact']['social_media']['telegram'], 'https://t.me/example')
+        self.assertEqual(self.place.communication_info.filter(type='phone').count(), 3)
+
+    def test_place_admin_form_uses_current_fields(self):
+        from django.contrib.admin.sites import AdminSite
+        from django.test import RequestFactory
+        from places.admin import PlaceAdmin
+        form = PlaceAdmin(Place, AdminSite()).get_form(RequestFactory().get('/admin/'))
+        self.assertIn('title_ar', form.base_fields)
+        self.assertNotIn('phone', form.base_fields)
+
+    def test_new_coordinate_and_sector_constraints(self):
+        from django.db import IntegrityError, transaction
+        for values in ({'latitude': 0}, {'longitude': None}, {'sector': 'public'}):
+            with self.assertRaises(IntegrityError), transaction.atomic():
+                Place.objects.filter(pk=self.place.pk).update(**values)
 
     def test_search_all_api(self):
         """فحص محرك البحث العلوي الشامل مع دعم البلديات والأحياء والشوارع"""

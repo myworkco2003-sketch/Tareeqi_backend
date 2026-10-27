@@ -3,7 +3,8 @@ from pathlib import Path
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from places.models import Place, Category, PlaceSubCategory
+from places.contacts import save_contact_values
+from places.models import Place, Category, SubCategory
 
 
 class Command(BaseCommand):
@@ -19,29 +20,32 @@ class Command(BaseCommand):
             'music-institute': 'معاهد موسيقية', 'fine-arts': 'فنون تشكيلية',
         }
         subcategories = {
-            slug: PlaceSubCategory.objects.get_or_create(
+            slug: SubCategory.objects.get_or_create(
                 category=category, slug=slug, defaults={'name_ar': label, 'icon': 'landmark'}
             )[0] for slug, label in labels.items()
         }
         created = 0
         for entry in data['facilities']:
             has_location = entry['latitude'] is not None and entry['longitude'] is not None
-            if has_location and not (33 < entry['latitude'] < 34 and 36 < entry['longitude'] < 37):
+            if not has_location:
+                self.stdout.write(self.style.WARNING(f"Skipped unlocated facility: {entry['title']}"))
+                continue
+            if not (33.40 <= entry['latitude'] <= 33.62 and 36.14 <= entry['longitude'] <= 36.42):
                 raise ValueError(f"Invalid Damascus coordinates for {entry['title']}")
             description = [entry.get('services', ''), entry.get('notes', '')]
             if entry.get('out_of_service'):
                 description.append('خارج الخدمة وفق التقرير. لم يرد موقع جغرافي في المصدر.')
             description.append(f"المصدر: {data['source']} — الصفحة {entry['page']}.")
-            _, is_new = Place.objects.update_or_create(title=entry['title'], defaults={
+            place, is_new = Place.objects.update_or_create(title_ar=entry['title'], defaults={
                 'sub_category': subcategories[entry['subcategory']],
                 'latitude': entry['latitude'], 'longitude': entry['longitude'],
-                'location_text': entry.get('address', ''), 'phone': entry.get('phones', ''),
-                'email': entry.get('email', ''),
+                'location_text': entry.get('address', ''),
                 'opening_hours': {'hours': entry['hours']} if entry.get('hours') else {},
                 'description': '\n'.join(line for line in description if line),
-                'sector': Place.Sector.PUBLIC,
+                'sector': 'Public',
                 'is_visible': has_location and not entry.get('out_of_service', False),
                 'is_verified': True,
             })
+            save_contact_values(place, phone=entry.get('phones', ''), email=entry.get('email', ''))
             created += is_new
-        self.stdout.write(self.style.SUCCESS(f'Imported {len(data["facilities"])} facilities ({created} new). 10 mapped; 4 unlocated/out of service.'))
+        self.stdout.write(self.style.SUCCESS(f'Processed {len(data["facilities"])} source facilities ({created} new); unlocated facilities were skipped.'))

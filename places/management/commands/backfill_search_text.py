@@ -17,7 +17,7 @@ class Command(BaseCommand):
             admin_name = p.admin_area.name_ar if p.admin_area else ""
             cat_name = p.sub_category.name_ar if p.sub_category else ""
             p.search_text = build_search_index_text(
-                p.title, p.title_en, admin_name, cat_name, p.location_text
+                p.title_ar, p.title_en, admin_name, cat_name, p.location_text
             )
             batch.append(p)
             place_count += 1
