@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from . import tile_views
 urlpatterns = [
     # التقسيمات الإدارية المعتمدة
     path('admin-areas/', views.list_admin_areas_geojson, name='admin_areas_geojson'),
@@ -27,4 +27,14 @@ urlpatterns = [
     
     # التنبيهات والإشعارات
     path('notifications/', views.list_notifications, name='notifications'),
-]
+    path(
+        "tiles/damascus/<int:z>/<int:x>/<int:y>",
+        tile_views.get_damascus_tile,
+        name="damascus_tile",
+    ),
+    path(
+        "fonts/<str:fontstack>/<str:font_range>.pbf",
+        tile_views.get_font,
+        name="map_font",
+    ),
+    ]

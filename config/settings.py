@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # Local apps
     'places',
+    'buses'
 ]
 
 MIDDLEWARE = [
@@ -99,7 +100,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'damascus_guide_db'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345678'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
     }
@@ -169,6 +170,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://landmarx.dev',
     'https://www.landmarx.dev',
     'http://www.landmarx.dev',
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
