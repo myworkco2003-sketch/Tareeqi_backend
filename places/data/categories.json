@@ -1,0 +1,206 @@
+[
+  {
+    "slug": "damascus-governorate",
+    "name_ar": "مباني محافظة دمشق",
+    "icon": "landmark",
+    "subcategories": [
+      {
+        "slug": "citizen-service-centers",
+        "name_ar": "مراكز خدمة المواطن"
+      },
+      {
+        "slug": "municipality-buildings",
+        "name_ar": "مباني البلديات (دوائر الخدمات)"
+      },
+      {
+        "slug": "municipalities",
+        "name_ar": "بلديات"
+      }
+    ]
+  },
+  {
+    "slug": "government",
+    "name_ar": "مباني حكومية",
+    "icon": "landmark",
+    "subcategories": [
+      {
+        "slug": "ministries",
+        "name_ar": "الوزارات"
+      },
+      {
+        "slug": "central-directorates",
+        "name_ar": "المديريات المركزية والهيئات"
+      },
+      {
+        "slug": "embassies-consulates",
+        "name_ar": "السفارات والقنصليات"
+      },
+      {
+        "slug": "courts",
+        "name_ar": "المحاكم"
+      },
+      {
+        "slug": "police-stations",
+        "name_ar": "مخافر"
+      }
+    ]
+  },
+  {
+    "slug": "economy",
+    "name_ar": "اقتصاد",
+    "icon": "coins",
+    "subcategories": [
+      {
+        "slug": "banks",
+        "name_ar": "البنوك"
+      },
+      {
+        "slug": "atm",
+        "name_ar": "ATM"
+      }
+    ]
+  },
+  {
+    "slug": "public-facilities",
+    "name_ar": "المرافق العامة",
+    "icon": "trees",
+    "subcategories": [
+      {
+        "slug": "parks",
+        "name_ar": "حدائق"
+      },
+      {
+        "slug": "squares",
+        "name_ar": "ساحات"
+      },
+      {
+        "slug": "departure-centers",
+        "name_ar": "مراكز انطلاق"
+      },
+      {
+        "slug": "interchange-centers",
+        "name_ar": "مركز تبادلي"
+      },
+      {
+        "slug": "airports",
+        "name_ar": "مطارات"
+      },
+      {
+        "slug": "historic-landmarks",
+        "name_ar": "معالم أثرية"
+      },
+      {
+        "slug": "rubble-dumps",
+        "name_ar": "مكبات أنقاض"
+      },
+      {
+        "slug": "immigration-passports",
+        "name_ar": "الهجرة والجوازات"
+      },
+      {
+        "slug": "entertainment",
+        "name_ar": "ترفيه"
+      },
+      {
+        "slug": "stadiums",
+        "name_ar": "ملاعب"
+      },
+      {
+        "slug": "cinemas",
+        "name_ar": "سينما"
+      },
+      {
+        "slug": "theaters",
+        "name_ar": "مسارح"
+      },
+      {
+        "slug": "opera-house",
+        "name_ar": "دار الأوبرا"
+      },
+      {
+        "slug": "commercial-markets",
+        "name_ar": "الأسواق التجارية"
+      },
+      {
+        "slug": "malls",
+        "name_ar": "مراكز تسوق"
+      }
+    ]
+  },
+  {
+    "slug": "communications",
+    "name_ar": "اتصالات",
+    "icon": "phone",
+    "subcategories": [
+      {
+        "slug": "post-offices",
+        "name_ar": "مراكز بريد"
+      },
+      {
+        "slug": "mobile-service-centers",
+        "name_ar": "مركز خدمة الجوال"
+      }
+    ]
+  },
+  {
+    "slug": "education",
+    "name_ar": "تربية وتعليم",
+    "icon": "graduation-cap",
+    "subcategories": [
+      {
+        "slug": "schools",
+        "name_ar": "مدارس"
+      },
+      {
+        "slug": "colleges",
+        "name_ar": "كليات"
+      },
+      {
+        "slug": "kindegartens",
+        "name_ar": "روضات"
+      }
+    ]
+  },
+  {
+    "slug": "religious",
+    "name_ar": "دور العبادة",
+    "icon": "moon",
+    "subcategories": [
+      {
+        "slug": "mosques",
+        "name_ar": "مساجد"
+      },
+      {
+        "slug": "churches",
+        "name_ar": "كنائس"
+      },
+      {
+        "slug": "religious-centers",
+        "name_ar": "مراكز شرعية"
+      }
+    ]
+  },
+  {
+    "slug": "healthcare",
+    "name_ar": "صحة",
+    "icon": "hospital",
+    "subcategories": [
+      {
+        "slug": "hospitals",
+        "name_ar": "مستشفيات"
+      },
+      {
+        "slug": "blood-banks",
+        "name_ar": "بنوك الدم"
+      },
+      {
+        "slug": "health-centers",
+        "name_ar": "مراكز صحية"
+      },
+      {
+        "slug": "pharmacies",
+        "name_ar": "صيدليات"
+      }
+    ]
+  }
+]

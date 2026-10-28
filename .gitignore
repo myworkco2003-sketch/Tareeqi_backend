@@ -15,5 +15,4 @@ data/samples/
 *.sql
 
 # One-off scripts and temporary tools (keep local, do not push to git)
-places/management/commands/seed_categories.py
 *.bak

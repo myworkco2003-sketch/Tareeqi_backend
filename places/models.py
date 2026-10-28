@@ -300,13 +300,14 @@ class Place(models.Model):
         ]
 
         constraints = [
+            # حتى يمكن اختيار أساسي إعدادي ثانوي...
             # القيم المسموحة للقطاع فقط
-            models.CheckConstraint(
-                condition=models.Q(
-                    sector__in=['Public', 'private', 'joint']
-                ),
-                name='places_sector_valid'
-            ),
+            # models.CheckConstraint(
+            #     condition=models.Q(
+            #         sector__in=['Public', 'private', 'joint']
+            #     ),
+            #     name='places_sector_valid'
+            # ),
 
             # حدود خط العرض
             models.CheckConstraint(
