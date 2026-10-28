@@ -1,18 +1,18 @@
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import bindparam, text
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.db.database import get_db
-from app.db.models import MinibusRoute, RouteFare, RouteVersion
+from app.db.models import Bus, BusRoute
 
-# مسارات عامة (للقراءة فقط) يستخدمها تطبيق الموبايل للمزامنة.
-# منفصلة عن /admin/* ولا تعدّل أي شي.
+
+# مسارات عامة للقراءة فقط، مخصصة لمزامنة بيانات الخطوط.
 router = APIRouter(
     prefix="/api/sync",
     tags=["App Sync"],
 )
 
-# إصدار مخطط قاعدة بيانات التطبيق (SQLite) اللي بيفهمه هالـ API
 SCHEMA_VERSION = 2
 
 
@@ -30,17 +30,21 @@ def read_dataset_version(db: Session) -> int:
     return int(version)
 
 
-def route_payload(route, version, fare, coordinates, length_m) -> dict:
+def route_payload(route, coordinates, length_m) -> dict:
     lons = [point[0] for point in coordinates]
     lats = [point[1] for point in coordinates]
 
+    price = route.bus.new_price
+
     return {
         "id": route.id,
-        "name": route.route_name,
-        "color": route.color,
-        "fare": fare,
-        "version": version.version,
-        "length_m": round(length_m, 1),
+        "bus_id": route.bus_id,
+        "name": route.bus.name,
+        "color": route.bus.color,
+        "fare": float(price) if price is not None else None,
+        "version": route.version,
+        "direction": route.direction,
+        "length_m": round(float(length_m), 1),
         "min_lon": min(lons),
         "min_lat": min(lats),
         "max_lon": max(lons),
@@ -51,9 +55,14 @@ def route_payload(route, version, fare, coordinates, length_m) -> dict:
 
 def load_published_routes(db: Session) -> list[dict]:
     routes = (
-        db.query(MinibusRoute)
-        .filter(MinibusRoute.is_active.is_(True))
-        .order_by(MinibusRoute.id)
+        db.query(BusRoute)
+        .join(BusRoute.bus)
+        .options(joinedload(BusRoute.bus))
+        .filter(
+            BusRoute.is_active.is_(True),
+            Bus.is_active.is_(True),
+        )
+        .order_by(BusRoute.bus_id, BusRoute.direction, BusRoute.id)
         .all()
     )
 
@@ -62,68 +71,40 @@ def load_published_routes(db: Session) -> list[dict]:
 
     route_ids = [route.id for route in routes]
 
-    # أحدث نسخة فعالة لكل خط
-    versions: dict[int, RouteVersion] = {}
-    active_versions = (
-        db.query(RouteVersion)
-        .filter(
-            RouteVersion.route_id.in_(route_ids),
-            RouteVersion.is_active.is_(True),
-        )
-        .order_by(RouteVersion.version.desc())
-        .all()
-    )
-    for version in active_versions:
-        versions.setdefault(version.route_id, version)
-
-    if not versions:
-        return []
-
-    # هندسة كل النسخ باستعلام واحد (6 خانات عشرية = دقة حوالي 10 سم)
     geometry_rows = db.execute(
         text(
             """
-            SELECT id,
-                   ST_AsGeoJSON(geom, 6)::json AS g,
-                   ST_Length(geom::geography) AS length_m
-            FROM route_versions
+            SELECT
+                id,
+                ST_AsGeoJSON(line_string, 6)::json AS geometry,
+                ST_Length(line_string::geography) AS length_m
+            FROM bus_route
             WHERE id IN :ids
             """
         ).bindparams(bindparam("ids", expanding=True)),
-        {"ids": [version.id for version in versions.values()]},
+        {"ids": route_ids},
     ).all()
-    geometries = {row.id: row for row in geometry_rows}
 
-    # الأجرة الصالحة الأحدث لكل خط
-    fares: dict[int, float] = {}
-    valid_fares = (
-        db.query(RouteFare)
-        .filter(
-            RouteFare.route_id.in_(route_ids),
-            RouteFare.is_valid.is_(True),
-        )
-        .order_by(RouteFare.updated_at)
-        .all()
-    )
-    for fare in valid_fares:
-        fares[fare.route_id] = float(fare.fare)
+    geometries = {row.id: row for row in geometry_rows}
 
     result = []
 
     for route in routes:
-        version = versions.get(route.id)
-        geometry = geometries.get(version.id) if version else None
+        geometry = geometries.get(route.id)
 
-        if geometry is None:
+        if geometry is None or not geometry.geometry:
+            continue
+
+        coordinates = geometry.geometry.get("coordinates", [])
+
+        if len(coordinates) < 2:
             continue
 
         result.append(
             route_payload(
                 route,
-                version,
-                fares.get(route.id),
-                geometry.g["coordinates"],
-                float(geometry.length_m),
+                coordinates,
+                geometry.length_m,
             )
         )
 
@@ -140,8 +121,6 @@ def get_manifest(db: Session = Depends(get_db)):
 
 @router.get("/routes")
 def get_routes(db: Session = Depends(get_db)):
-    # منقرأ رقم النسخة قبل وبعد قراءة الخطوط: إذا ما تغيّر، الخطوط
-    # اللي قرأناها بالتأكيد تخص نفس النسخة (النشر بيغيّر الاثنين بعملية وحدة)
     for _ in range(3):
         before = read_dataset_version(db)
         routes = load_published_routes(db)
