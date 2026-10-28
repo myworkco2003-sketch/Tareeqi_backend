@@ -7,7 +7,7 @@ from .models import (
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name_ar', 'name_en', 'slug', 'icon', 'color', 'sort_order', 'is_active')
+    list_display = ('name_ar', 'name_en', 'slug', 'icon', 'sort_order', 'is_active')
     list_filter = ('is_active',)
     search_fields = ('name_ar', 'name_en', 'slug')
     ordering = ('sort_order', 'id')
@@ -23,7 +23,7 @@ class StreetAdmin(admin.ModelAdmin):
 
 @admin.register(SubCategory)
 class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name_ar', 'category', 'slug', 'icon', 'color')
+    list_display = ('name_ar', 'category', 'slug', 'icon')
     list_filter = (['category'])
     search_fields = ('name_ar', 'slug')
     ordering = ('category', 'name_ar')

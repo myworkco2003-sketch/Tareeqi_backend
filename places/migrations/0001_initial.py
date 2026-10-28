@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('name_en', models.CharField(blank=True, max_length=100, verbose_name='اسم التصنيف بالإنجليزية')),
                 ('slug', models.SlugField(max_length=100, unique=True, verbose_name='المعرف البرمجي')),
                 ('icon', models.CharField(default='map-pin', max_length=50, verbose_name='رمز الأيقونة')),
-                ('color', models.CharField(default='#064239', max_length=20, verbose_name='لون الطبقة')),
+                # ('color', models.CharField(default='#064239', max_length=20, verbose_name='لون الطبقة')),
                 ('is_active', models.BooleanField(default=True, verbose_name='مفعل على الخريطة')),
                 ('sort_order', models.IntegerField(default=0, verbose_name='ترتيب العرض')),
             ],
@@ -156,7 +156,7 @@ class Migration(migrations.Migration):
                 ('name_en', models.CharField(blank=True, max_length=100)),
                 ('slug', models.SlugField(max_length=100)),
                 ('icon', models.CharField(blank=True, max_length=50, null=True, verbose_name='أيقونة مخصصة (اختياري)')),
-                ('color', models.CharField(blank=True, max_length=20, null=True, verbose_name='لون مخصص (اختياري)')),
+                # ('color', models.CharField(blank=True, max_length=20, null=True, verbose_name='لون مخصص (اختياري)')),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subcategories', to='places.category', verbose_name='التصنيف الرئيسي')),
             ],
             options={

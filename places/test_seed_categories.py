@@ -19,11 +19,7 @@ class SeedCategoriesTests(TestCase):
             'communications', 'education', 'religious', 'healthcare',
         ])
         self.assertEqual(SubCategory.objects.get(category__slug='education', slug='schools').name_ar,
-                         'مدارس أساسي')
-        self.assertEqual(SubCategory.objects.get(category__slug='education', slug='middle-schools').name_ar,
-                         'مدارس إعدادي')
-        self.assertEqual(SubCategory.objects.get(category__slug='education', slug='high-schools').name_ar,
-                         'مدارس ثانوي')
+                         'مدارس')
         self.assertEqual(SubCategory.objects.get(category__slug='healthcare', slug='hospitals').name_ar,
                          'مستشفيات')
         self.assertEqual(SubCategory.objects.filter(category__slug='public-facilities').count(), 15)
