@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .text_utils import build_search_index_text
 #! جدول التقسيمات الإدارية (AdminArea) مرتبط بنفسه عبر علاقة ForeignKey، ويحتوي على الحقول التالية:
-#!Done
+#TODO: Remove adminarea and street models and use the new geospatial data from the new database instead. The new database has a more accurate representation of administrative areas and streets in Damascus.
 class AdminArea(models.Model):
     """
     التقسيمات الإدارية الرسمية (محافظة دمشق -> البلديات والدوائر الخدمية -> الأحياء)
@@ -161,7 +161,9 @@ class SubCategory(models.Model):
         """
         ترجع لون التصنيف الفرعي إذا وُجد، وإلا ترجع لون التصنيف الرئيسي كقيمة افتراضية
         """
-        return self.color or (self.category.color if self.category else "#064239")
+        subcategory_color = getattr(self, 'color', None)
+        category_color = getattr(self.category, 'color', None) if self.category else None
+        return subcategory_color or category_color or "#064239"
 
 #! جدول الاماكن
 #!Done
@@ -345,7 +347,7 @@ class Place(models.Model):
             admin_name,
             cat_name,
             self.location_text
-        )
+        )[:self._meta.get_field('search_text').max_length]
 
         super().save(*args, **kwargs)
 

@@ -15,6 +15,10 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = BASE_DIR.parent
+
+MBTILES_PATH = PROJECT_ROOT / 'brouter' / 'damascus_2026.mbtiles'
+FONT_PATH = PROJECT_ROOT / 'frontend' / 'public' / 'fonts'
 
 
 # Quick-start development settings - unsuitable for production
@@ -164,8 +168,14 @@ CORS_ALLOW_ALL_ORIGINS = (
     os.environ.get('DJANGO_CORS_ALLOW_ALL', 'False') == 'True'
 )
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    h.strip()
+    for h in os.environ.get(
+        'DJANGO_CORS_ALLOWED_ORIGINS',
+        'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173',
+    ).split(',')
+    if h.strip()
+]
+CORS_ALLOWED_ORIGINS += [
     'https://landmarx.dev',
     'http://landmarx.dev',
     'https://www.landmarx.dev',
@@ -180,8 +190,12 @@ CORS_ALLOW_CREDENTIALS = True
 # believes every request is plain HTTP and CSRF/cookie security breaks.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_TRUSTED_ORIGINS = [
-    'https://landmarx.dev',
-    'https://www.landmarx.dev',
+    h.strip()
+    for h in os.environ.get(
+        'DJANGO_CSRF_TRUSTED_ORIGINS',
+        'https://landmarx.dev,https://www.landmarx.dev,http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000',
+    ).split(',')
+    if h.strip()
 ]
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
@@ -198,4 +212,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+# Invitation links authorize creation only, without a Django staff account.
+PLACES_FORM_LINK_MAX_AGE = int(os.environ.get('PLACES_FORM_LINK_MAX_AGE', str(30 * 24 * 60 * 60)))
+PLACES_FORM_LINK_VERSION = os.environ.get('PLACES_FORM_LINK_VERSION', '1')
+PLACES_SUBMISSION_AUTO_PUBLISH = os.environ.get('PLACES_SUBMISSION_AUTO_PUBLISH', 'True').lower() == 'true'
 

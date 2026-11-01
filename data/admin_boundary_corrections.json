@@ -1,0 +1,1914 @@
+{
+  "created_at": "2026-10-29",
+  "source": "OpenStreetMap",
+  "osm_snapshot": "2026-10-29T05:55:37Z",
+  "historical_snapshot": "2025-01-01T00:00:00Z",
+  "changes": [
+    {
+      "id": 350,
+      "name_ar": "دائرة خدمات اليرموك",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "6acf2014d0856bac96c8b57662e62ae5c890032160831ce6bbfbf77829535b36",
+      "after_sha256": "156cee6e6fbee94f47d2866d1fa1297a587ba46d14dea9cd25465c9b7e454901",
+      "area_change_percent": 10.8163,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          401,
+          412,
+          440
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 351,
+      "name_ar": "دائرة خدمات الشاغور",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "d021584b6c279e385b039628dbb44300838cd7c282b97a14c9ce1d39aa2c54a1",
+      "after_sha256": "236a98d5a3d001b3d8506ddf03fe63f4e19b2dd7aa4721d5c21c370a401ae9dc",
+      "area_change_percent": 13.4361,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          366,
+          388,
+          425,
+          428,
+          433,
+          443,
+          445,
+          464
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 352,
+      "name_ar": "دائرة خدمات الشام الجديدة",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "61a3466b3cca3c83c70f29c349beebcd49f09a8794dfda4153e90684aa3f7bd1",
+      "after_sha256": "a6fc6fa2560cc3f69c66fc2f87a9fb8c7fb2561eb261b9df25e528a58e96f24e",
+      "area_change_percent": 16.6427,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          462
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 353,
+      "name_ar": "دائرة خدمات القابون",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "eee1a13d9afbcae4df1184e5fa5828db52fcf9430d65c2dd39ccf92ebfb4d033",
+      "after_sha256": "416d05c4e7353f195eab9e0ce3fa6f83a79147fc98ddfd7a57cc21dc47660e6d",
+      "area_change_percent": 37.6837,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          404,
+          420,
+          436
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 354,
+      "name_ar": "دائرة خدمات القدم",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "71f1bd2fb99b0cb47805fb7f4db5c3619e61adad5d9d034d1dead54a2263005f",
+      "after_sha256": "ee2c3b7180006114e3fa272e6051d835cc713dddab861c64d2e8cc7af4f30f5d",
+      "area_change_percent": 2.2128,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          384,
+          397,
+          406,
+          407,
+          422,
+          439
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 355,
+      "name_ar": "دائرة خدمات القنوات",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "4889c06181bf0e756fb568c3adb1bcfc34e2490ec40b8bf1cbc09a6a044a5668",
+      "after_sha256": "a5bbab25c6beb5b0a828cd28ff2f51e7ddf3de58b875c89392b242e44dde253f",
+      "area_change_percent": -1.201,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          373,
+          375,
+          380,
+          390,
+          410,
+          416,
+          430,
+          432,
+          453
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 356,
+      "name_ar": "دائرة خدمات المزة",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "75656a0fc1ee05aff70a378807d4c2e669c3824ec996a35f8c19da3da5847796",
+      "after_sha256": "0fa0d659eea69a7bea02c617d0b82ecf96bae685ab862a78ab08d02a83b83758",
+      "area_change_percent": 1.4762,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          377,
+          386,
+          450,
+          451,
+          456,
+          457,
+          459
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 357,
+      "name_ar": "دائرة خدمات المهاجرين",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "9f28990f3da9979d89629dd08cc109dd9be579de328397f5e6a8b5841f4dfb6c",
+      "after_sha256": "6991a6ccad0290bf803f19c2b0c9bf01a9d2b2d50e0b45da358be412649b59c1",
+      "area_change_percent": 0.0533,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          368,
+          379,
+          387,
+          392,
+          393,
+          414,
+          417,
+          418,
+          419,
+          421,
+          447
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 358,
+      "name_ar": "دائرة خدمات الميدان",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "7092b61d506294ca8674e1e607b2620b02a30b950ed02491cfa0a85746f7a7ac",
+      "after_sha256": "8b42d8a1172806cba2ecda575a1678a077b5565ed171f81e3c6035c544787c73",
+      "area_change_percent": 4.1123,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          382,
+          385,
+          405,
+          434,
+          463,
+          465,
+          466
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 359,
+      "name_ar": "دائرة خدمات برزة",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "cfa39b2f0818b2dd24aca1e6a04cfab64e92aa96ddd1cbaea0570df6efa7e99c",
+      "after_sha256": "d63997d97745c26e45b711f7db1ca2019ec21e615937d00c1ff2faadaab8a3fc",
+      "area_change_percent": 10.6176,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          394,
+          423,
+          424,
+          435,
+          448,
+          460
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 360,
+      "name_ar": "دائرة خدمات جوبر",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "d0458a303cc2ba07573e242e9385442a28a48edea9a994f2bceae4b63e89f23f",
+      "after_sha256": "15d6d69cd4d104441230dcbf0ecb871c9528653fe5293c37a7c35dc1e0b0857f",
+      "area_change_percent": -3.4599,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          371,
+          415,
+          437,
+          438
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 361,
+      "name_ar": "دائرة خدمات دمر",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "f99ab70620f1e096cc239f526da9a07c13ba47e948c48ea57496613318b9f277",
+      "after_sha256": "b979e2c1ffb522e9005d02bf43e5b02151072470022e879aa48db1f8b8fa688c",
+      "area_change_percent": 10.3959,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          396,
+          429,
+          441,
+          442
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 362,
+      "name_ar": "دائرة خدمات دمشق القديمة",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "98ba686e0d2feb72b982b0a86416a2cd95139c4c43dc973824426725b1e9c4b6",
+      "after_sha256": "120b7b02a4d876ed81bb523b99e35e7fcafde7eb9050bb3e42ff6b2fe78d0eec",
+      "area_change_percent": 0.3969,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          372,
+          378,
+          381,
+          383,
+          400,
+          411,
+          431,
+          446,
+          455
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 363,
+      "name_ar": "دائرة خدمات ركن الدين",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "3fc876d2080981051c7f79839f39c760d6d6a55652013b26aec45cdf11645f3b",
+      "after_sha256": "c93f0e6eb75f410c96322c59f6577523641a05d2ed42a0abab78247fcaf7ddf3",
+      "area_change_percent": 0.9891,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          367,
+          369,
+          374,
+          403,
+          426,
+          452
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 364,
+      "name_ar": "دائرة خدمات ساروجا",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "ec6531bb09c3eb0ada7c35f7aa2d78b1817f78b7dbe8afcc0ec32f7d5860af6c",
+      "after_sha256": "50292a35e46c7fe98ee2a2e3cbf6e5c4451d63b5f3c0d2c38935208ba792a636",
+      "area_change_percent": 0.5502,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          395,
+          398,
+          399,
+          408,
+          409,
+          444,
+          449,
+          461
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 365,
+      "name_ar": "دائرة خدمات كفرسوسة",
+      "level": 9,
+      "parent_id": null,
+      "before_sha256": "54c85062c493686f836bd7877e6f2e0c4aea035c99ce335c513c82f4304b756e",
+      "after_sha256": "75cb94983c556ea3f548d1285b6b649918a3ed855d8f7723b040fa45bdaab53e",
+      "area_change_percent": -1.8223,
+      "source": {
+        "type": "union_of_osm_neighborhoods",
+        "child_ids": [
+          370,
+          402,
+          413,
+          427,
+          454,
+          458
+        ],
+        "note": "Existing service-district membership retained; OSM municipality levels/names are not substituted."
+      }
+    },
+    {
+      "id": 366,
+      "name_ar": "حي ابن عساكر",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "cd7029a24b6860101146c2f53bf99eb1c61c62103c97675919e82fd1d216a50c",
+      "after_sha256": "90c119a9d62cf0837f1fc08c410de113a70b334a5d44927089bf0a7e492adab3",
+      "area_change_percent": -23.2096,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433883,
+        "url": "https://www.openstreetmap.org/relation/13433883",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 367,
+      "name_ar": "حي أبو جرش",
+      "level": 10,
+      "parent_id": 363,
+      "before_sha256": "da9851586b6005b603dc30f3d5c1c2ac03e86d3658c42a250ad4f9266b032b5f",
+      "after_sha256": "d7f5f3d52ac7ebc987e556edb0af36dfa0c23d0a3d797fc67592a2ab7b27294d",
+      "area_change_percent": -0.1259,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13334716,
+        "url": "https://www.openstreetmap.org/relation/13334716",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 368,
+      "name_ar": "حي أبو رمانة",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "f4b4c3f1c1f98dc744c1f2f548946d09083d4a975e5d1071a3aee94a4f6d0fab",
+      "after_sha256": "63a09539b2f05a1ac7303605b8f4c4322f1c786120dc21086d238b6415610d21",
+      "area_change_percent": 0.7379,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13289446,
+        "url": "https://www.openstreetmap.org/relation/13289446",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 369,
+      "name_ar": "حي أسد الدين",
+      "level": 10,
+      "parent_id": 363,
+      "before_sha256": "04da3635dd9229f8efd993a57364d3be03c055994cfe1c01bdddcbd1cc4b2da3",
+      "after_sha256": "525ac307c672525ab52f10f019068c2c40aff3b4e599ea5dbd187bbff51c04fa",
+      "area_change_percent": -9.41,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13288134,
+        "url": "https://www.openstreetmap.org/relation/13288134",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 370,
+      "name_ar": "حي الاخلاص",
+      "level": 10,
+      "parent_id": 365,
+      "before_sha256": "73124f27e47108ed6f28c324a08c22860ca401f9dd1f56d683c2023ba5a71c77",
+      "after_sha256": "31970e06b585a03df324a84ba6797501683ebd42dbfa4fcb273bc5d23a30d027",
+      "area_change_percent": -1.5361,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041925,
+        "url": "https://www.openstreetmap.org/relation/14041925",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 371,
+      "name_ar": "حي الاستقلال",
+      "level": 10,
+      "parent_id": 360,
+      "before_sha256": "3d1cb6e048aaf88c965948b84aa0c44210884e5124bf2c772fa9ae5bbeb98e38",
+      "after_sha256": "ca48160a399fc9ba0a4d4af643c9ae35f743762cdc6dae124ea91b7cc3d7025f",
+      "area_change_percent": -10.6247,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13438165,
+        "url": "https://www.openstreetmap.org/relation/13438165",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 372,
+      "name_ar": "حي الأمين",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "aa39bc414dc8cdd172f4a017527bded683acbc42d8932642ffe38d3c00ff67aa",
+      "after_sha256": "7fb1cc02d571ff4650a859451198803dfb91e4b45b678460b565033473ce0ac7",
+      "area_change_percent": 4.1091,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442501,
+        "url": "https://www.openstreetmap.org/relation/13442501",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 373,
+      "name_ar": "حي الأنصاري",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "d83a9f5c3ba47e90d785495692fdb699900e40e2b6d79d7a013380ec60f343b1",
+      "after_sha256": "453c57864cd3b25526d653e6d39d517597fc5f0a264f48c860044070cc051297",
+      "area_change_percent": 10.8697,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384158,
+        "url": "https://www.openstreetmap.org/relation/13384158",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 374,
+      "name_ar": "حي الأيوبية",
+      "level": 10,
+      "parent_id": 363,
+      "before_sha256": "c618df934559c284afdbc6f841d70473ba5b9ba7f1c8be4a26a988aef1b76e44",
+      "after_sha256": "dd0875238c9a6da3d1ca57d9b8783a6fa1416cdff7a9dcc75e9428415df85747",
+      "area_change_percent": -0.1353,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13288713,
+        "url": "https://www.openstreetmap.org/relation/13288713",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 375,
+      "name_ar": "حي البرامكة",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "4cc9a1b1d5ca4b08e9ccbf756ee408409c79778dc3add423528e063d1b333e8a",
+      "after_sha256": "368200582ba00c9752d875a9bfe7d9509ce35cbcc195d6e66f024fb18255fa99",
+      "area_change_percent": -0.0159,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384157,
+        "url": "https://www.openstreetmap.org/relation/13384157",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 377,
+      "name_ar": "حي الجلاء",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "4001eb99f56f8b432af9a07300bf18279d3337bda6fedc9cb1c54f0bc2a95d0e",
+      "after_sha256": "00ad3f1ec054075dd52327ade7921800932fd4043d8458de47bbc61c0c525ad3",
+      "area_change_percent": 1.3754,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13359472,
+        "url": "https://www.openstreetmap.org/relation/13359472",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 378,
+      "name_ar": "حي الجورة",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "f7642432a4201c5525dc534174dd44c315cf81cdc303498d749cb35daeda37ae",
+      "after_sha256": "3ce946b83decd6206603a39c9f4a4f50530ecb1578e804a3daecabb0461cd7c8",
+      "area_change_percent": 3.1903,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442499,
+        "url": "https://www.openstreetmap.org/relation/13442499",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 379,
+      "name_ar": "حي الحبوبي",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "166a0492fede2e9b5d7e0b802b1ce912e7c13c94ada26401f83e03835ce121d8",
+      "after_sha256": "07b017d3a6a98d0e6a17d812ab21b4e7e8a1eaebcb55eedb41b79b67cb2285d8",
+      "area_change_percent": -0.5063,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13289447,
+        "url": "https://www.openstreetmap.org/relation/13289447",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 380,
+      "name_ar": "حي الحجاز",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "47c84fce55ffcc42fd35fb379006a698fdf27108f66b4276af4cddcb60216288",
+      "after_sha256": "bc3caafdd17f5475085216f9c97d7fa8cfbd38738c6133ded9f22003acef5721",
+      "area_change_percent": -6.3335,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384156,
+        "url": "https://www.openstreetmap.org/relation/13384156",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 381,
+      "name_ar": "حي الحريقة",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "dbaa05340eed57c9d0c8122ebd37d1d7d7e7af8c7da367ffc31962b741e5df01",
+      "after_sha256": "896d3a2c643dec0a638014332ca969481068fa3f4a85efd3f830d0c3531e70b8",
+      "area_change_percent": 21.7786,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442504,
+        "url": "https://www.openstreetmap.org/relation/13442504",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 382,
+      "name_ar": "حي الحقلة",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "fe8008a4a0e104ff53483984e3b1fde6a731949990d15ca3589696373f4b8d9b",
+      "after_sha256": "92ffe63122c4b1d28d496f74c03ac2eded634f942d715ed88dd4bc0e7b6415f5",
+      "area_change_percent": -5.02,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14042913,
+        "url": "https://www.openstreetmap.org/relation/14042913",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 383,
+      "name_ar": "حي الحميدية",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "841eaeeac9356994a1ead41d28cb04bed7f932e3f5246c13759896b54e3f3084",
+      "after_sha256": "349a907bcc9bc8e1c06436a2195e703319a0619e460535c7478dc7ab48b1a4f3",
+      "area_change_percent": -1.7226,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442506,
+        "url": "https://www.openstreetmap.org/relation/13442506",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 384,
+      "name_ar": "حي السيدة عائشة",
+      "level": 10,
+      "parent_id": 354,
+      "before_sha256": "476a919b67711a0fc1d7747f59eef17bdbe103dbef75f9e2582e80e0ea936b12",
+      "after_sha256": "db268e5e58086ba2191da2e5481e1c19e59b6d3f0a85a098fff63c00267e24d5",
+      "area_change_percent": -51.5663,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14043001,
+        "url": "https://www.openstreetmap.org/relation/14043001",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 385,
+      "name_ar": "حي الدقاق",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "7b3dd5b7509976e0f6321e9709b6a2319d0b8baaade49123ce2b5e61aff196ff",
+      "after_sha256": "9c62e967e209075fc39cf5d18faaa68187b97ef99a37c33c9501f259416f3bb3",
+      "area_change_percent": 1.8904,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14042915,
+        "url": "https://www.openstreetmap.org/relation/14042915",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 386,
+      "name_ar": "حي الربوة",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "13f82d975fb04dd3feb651f6ff08ab2c5b346f87bd7793656f6283a224288e06",
+      "after_sha256": "99758b96e531018f87f5673aaec834771968ba5c51b7634b99a1af4006d91e89",
+      "area_change_percent": 1.8554,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13359474,
+        "url": "https://www.openstreetmap.org/relation/13359474",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 387,
+      "name_ar": "حي الروضة",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "de399fb4f51af6c8c3e37042a1f4aae90c93b2a74408ee4e697d1351aa76a190",
+      "after_sha256": "60ec874b340d629078c71f952c96519da9cf5594619760fc69fa1bd9b89ddb0e",
+      "area_change_percent": -3.1273,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13289448,
+        "url": "https://www.openstreetmap.org/relation/13289448",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 388,
+      "name_ar": "حي الزهور",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "6f87cb91353177888aa5a33273617e1fa0bc40826f5f6fc0478c902f72db0e0e",
+      "after_sha256": "cf96a60e3c03b0b4dcd4291083dc1668284972129be16d5b9744c7fccd133683",
+      "area_change_percent": 43.1664,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433882,
+        "url": "https://www.openstreetmap.org/relation/13433882",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 390,
+      "name_ar": "حي السويقة",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "8abe13d664d4734c573fa05487980010f42a737fd39e3cfe2c93124aa2c70d89",
+      "after_sha256": "a0f4a03102a9543512eeb2abfe9eaf291e91a5948d4feab1dc009e855416c2ff",
+      "area_change_percent": -5.0455,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384311,
+        "url": "https://www.openstreetmap.org/relation/13384311",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 392,
+      "name_ar": "حي الشهداء",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "2a3a8ff03cf2390a8327857ef1ab2e3f7ed0f1fac53186dd25d59df451267312",
+      "after_sha256": "2888faf628378b1bf8ff70a3f7a0d3251d10716daf9db28f18c7834ffa1f8881",
+      "area_change_percent": -0.6679,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338691,
+        "url": "https://www.openstreetmap.org/relation/13338691",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": true
+      }
+    },
+    {
+      "id": 393,
+      "name_ar": "حي الشيخ محي الدين",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "8fd2b45f7a8e0bfeeb728e7c922f81a9d5ffbdfd87a7d4d155b03aee45ec2f58",
+      "after_sha256": "fd6577d9e42f916cc3d5c2e16e260b069afd206989a94a6b9b3cdce6272dc4df",
+      "area_change_percent": 0.8115,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338690,
+        "url": "https://www.openstreetmap.org/relation/13338690",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": true
+      }
+    },
+    {
+      "id": 394,
+      "name_ar": "حي العباس",
+      "level": 10,
+      "parent_id": 359,
+      "before_sha256": "82e3984206f7ace7fe67e11c4615f84002c77fd8ef35ccfc3ed110dfae697c24",
+      "after_sha256": "0faf902e69db69d9ded7cc50d2a53b5da1356960dbdd1c5d09b1309fcea35469",
+      "area_change_percent": 0.7528,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13304264,
+        "url": "https://www.openstreetmap.org/relation/13304264",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 395,
+      "name_ar": "حي العدوي",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "e1fdcfcbc6d65124b4a68840e0b6253d5db21ff5c15f77209006dad3ba00d5c2",
+      "after_sha256": "98d0f8daec3bcb4447c9c40ca9b9b456caa477b6667dcd7abe10404d7822b917",
+      "area_change_percent": -0.1832,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338557,
+        "url": "https://www.openstreetmap.org/relation/13338557",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 396,
+      "name_ar": "حي العرين",
+      "level": 10,
+      "parent_id": 361,
+      "before_sha256": "9a613e0a432759012cbc6d323b705eb2d7e7eceb3f8af84bd778b5d79444a5a5",
+      "after_sha256": "d5c4e2ac55e1f0f5c3c8b337b2d71afe0ecb41f4b99495d3baa9e97941d8ab97",
+      "area_change_percent": -23.4263,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13360834,
+        "url": "https://www.openstreetmap.org/relation/13360834",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 397,
+      "name_ar": "حي العسالي",
+      "level": 10,
+      "parent_id": 354,
+      "before_sha256": "76f9e5880d206a515d909c5e815546826421d25392d5c3fcf90deb3529944b02",
+      "after_sha256": "58f7e3e42d0e78e68129ad766fb95de8e6c2e92c5775651ffefc1995e664559b",
+      "area_change_percent": 84.6466,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14043005,
+        "url": "https://www.openstreetmap.org/relation/14043005",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 398,
+      "name_ar": "حي العقيبة",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "2979cb3bdc53113abd661877b3be8c89d5440e4812fb4f1348bfe39ed4886c1f",
+      "after_sha256": "3f7c632bdf7c65e35545f00629b73aaf67327fa0ff16cdaa38a63189c05e1a1f",
+      "area_change_percent": 0.439,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338933,
+        "url": "https://www.openstreetmap.org/relation/13338933",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 399,
+      "name_ar": "حي العمارة البرانية",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "145ec061d0a9f3a644ff2bb4701822ad2cee942cf746fe749b1213add21e5a85",
+      "after_sha256": "7e438d8ad9fbf40e5ec6f752d396a8adc35b02a7b83198afc7d313de4d0c405d",
+      "area_change_percent": -5.7913,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338935,
+        "url": "https://www.openstreetmap.org/relation/13338935",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 400,
+      "name_ar": "حي العمارة الجوانية",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "72c08a41a441dcdcd0dca1095e3aa6b175634beace42eb4ad7f23daaa29160f6",
+      "after_sha256": "ac389af7439bceaeeadcac8cdb4b819910170a7ddbab0f90ece9346e0804c661",
+      "area_change_percent": 0.2412,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442507,
+        "url": "https://www.openstreetmap.org/relation/13442507",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 401,
+      "name_ar": "حي الفالوجة",
+      "level": 10,
+      "parent_id": 350,
+      "before_sha256": "fbd79f96baea1ae7907c5996738b215b452a74eefa149d8251742da8ba6e9a33",
+      "after_sha256": "adbfb145e12d5e69eef5abefc78099f0b288fb8e59e15d1899ac019398a3a9c6",
+      "area_change_percent": 1.2512,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 15775455,
+        "url": "https://www.openstreetmap.org/relation/15775455",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 402,
+      "name_ar": "حي الفردوس",
+      "level": 10,
+      "parent_id": 365,
+      "before_sha256": "7618ece8158d51f29435bda4ccdf0c8178cdcd52fe2b50130278ae20fca41dc9",
+      "after_sha256": "c3f70cc6481baef783034b1953d6bb09f2d2a50dc45a32b8b81143b96997a67f",
+      "area_change_percent": 2.0256,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041922,
+        "url": "https://www.openstreetmap.org/relation/14041922",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 403,
+      "name_ar": "حي الفيحاء",
+      "level": 10,
+      "parent_id": 363,
+      "before_sha256": "c1f34e2b284cbcd801b48ebd0f4dad617e8d16c90b19bd793e4e8be1113d41d1",
+      "after_sha256": "6ee71b1c5c9a9e7adbc913eb15f70ba73d08cff452e9f2034326540a7c82f847",
+      "area_change_percent": -0.6827,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13288714,
+        "url": "https://www.openstreetmap.org/relation/13288714",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 404,
+      "name_ar": "حي القابون",
+      "level": 10,
+      "parent_id": 353,
+      "before_sha256": "5d0131716c6b6aa14ffcc175d1102e1989365720cfe152a3fc03ef4a53fdb21a",
+      "after_sha256": "69f98587257f1d4081eef89672dd370097be648e74325f90fd9f083396c6be94",
+      "area_change_percent": 48.8689,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13333331,
+        "url": "https://www.openstreetmap.org/relation/13333331",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 405,
+      "name_ar": "حي القاعة",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "e3a8cf1f6d3098e2787d7ba3d1c4fc0584d0ce99d2167ec5cc24394a42c906bd",
+      "after_sha256": "be4079cf31b5d19131de426c70d19162c99d5160d13784442da0104556314625",
+      "area_change_percent": 0.1542,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14042914,
+        "url": "https://www.openstreetmap.org/relation/14042914",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 406,
+      "name_ar": "حي القدم",
+      "level": 10,
+      "parent_id": 354,
+      "before_sha256": "9fd69fa77435513991417ffe60d8cebb378f4e0b500cec4976a037612fb73ce7",
+      "after_sha256": "d7372befa245822baaf83247c67fd51a3ed3adb8522f976d69880b227aeab557",
+      "area_change_percent": -2.8197,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14043060,
+        "url": "https://www.openstreetmap.org/relation/14043060",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 407,
+      "name_ar": "حي القدم الشرقي",
+      "level": 10,
+      "parent_id": 354,
+      "before_sha256": "0fc3579fb9c7791ae83bcd1160e30a3de0f9f18526b86a8ff8838c1af04d4d0c",
+      "after_sha256": "7075f36c4326ae163091960c7a927aec584d343d037092440334a57c9a20fc1f",
+      "area_change_percent": 22.4186,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14043004,
+        "url": "https://www.openstreetmap.org/relation/14043004",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 408,
+      "name_ar": "حي القصاع",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "e1de36f414706d2d2dfeb632e36863b3cb065dc2307b4aca6c9ba8f1544cf23b",
+      "after_sha256": "a641a4805f52677b5c667560d717dc84058d53ac69020d592366f4b9b217459f",
+      "area_change_percent": -1.4874,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13337429,
+        "url": "https://www.openstreetmap.org/relation/13337429",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 409,
+      "name_ar": "حي القصور",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "8c94a0054f0e74791b27862e308bbfca3410a9e6d814bf6e3ee89091b7307bd4",
+      "after_sha256": "b366416e40bbd9d60fd83e1b9439b7d481f56f2f6f501b7ee248ec1a82e4aaa8",
+      "area_change_percent": -0.7126,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338556,
+        "url": "https://www.openstreetmap.org/relation/13338556",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 410,
+      "name_ar": "حي القنوات",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "743cc712a416e887b39807ab4a12479bece2c9d5a39ccd13472979b9390712d1",
+      "after_sha256": "4c299016e787411db0c41001eaa538dfb2ccffb529001fb4e0b1ae126ee407e1",
+      "area_change_percent": 3.7426,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384309,
+        "url": "https://www.openstreetmap.org/relation/13384309",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 411,
+      "name_ar": "حي القيمرية",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "5432faf3c60fc2b18e89ce6958adec5fc199f82ec6dff4704d5c719912127b73",
+      "after_sha256": "fd0d670afb468c4d75b9959470eeea9885d23591e8c6084d48bd25f58d8c1eb1",
+      "area_change_percent": -8.8435,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442505,
+        "url": "https://www.openstreetmap.org/relation/13442505",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 412,
+      "name_ar": "حي الكرمل",
+      "level": 10,
+      "parent_id": 350,
+      "before_sha256": "1daf1183588f7dc03a584951d0216e747eab008b4354b77673768854529b449f",
+      "after_sha256": "4abbd94e12f436c2209df0675113f9fdd1c07455e508879eb184572ed208b1b7",
+      "area_change_percent": 10.1945,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 15775456,
+        "url": "https://www.openstreetmap.org/relation/15775456",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 413,
+      "name_ar": "حي اللوان",
+      "level": 10,
+      "parent_id": 365,
+      "before_sha256": "68f16870616f4aa5e08551fdb776d53d70615e1583f5c2f066728a8cfbc44d94",
+      "after_sha256": "cd19198a9e0a623f56b8dfa2e1160ba33c6643d3ce3d48fc49ba5925a3e2c01f",
+      "area_change_percent": -5.3317,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041921,
+        "url": "https://www.openstreetmap.org/relation/14041921",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 414,
+      "name_ar": "حي المالكي",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "8091cec15e119b08b4ac58bfe46b3a12f6a55d5cc16fc5f1262c63134076b127",
+      "after_sha256": "3a2e5415d8a8d7bbaf4664590c5f746f2c1ddb9a8c8f94a1354a556817bf89c9",
+      "area_change_percent": -0.7464,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13288839,
+        "url": "https://www.openstreetmap.org/relation/13288839",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 415,
+      "name_ar": "حي المامونية",
+      "level": 10,
+      "parent_id": 360,
+      "before_sha256": "78bd05dd28cb10952692ef8444459567f5e9e6b11a18ba6fedfabcbddca74bdd",
+      "after_sha256": "7cde1af8dc9482e9b378b0e4ed9c0b116c307cd74603ddfa991c68822750c47c",
+      "area_change_percent": -9.3282,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13438166,
+        "url": "https://www.openstreetmap.org/relation/13438166",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 416,
+      "name_ar": "حي المجتهد",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "1c0dd14eccb54ab495f933d10ebb62b23a84f7e1e09857d0773b501caed1525d",
+      "after_sha256": "45bc58482a63ea27b7a956ad78ac379ec7e86eeff1b66f5677700588529d19f9",
+      "area_change_percent": 1.6979,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384306,
+        "url": "https://www.openstreetmap.org/relation/13384306",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 417,
+      "name_ar": "حي المدارس",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "0a142e31f1e70ec7d5888ee70211a48121e895f044f681451c24ec5aae690ce6",
+      "after_sha256": "bbb24c1e7eb21945c3d7abd56cbc603ada01b4c114eab451d81037b3f6fbb858",
+      "area_change_percent": 0.9475,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338692,
+        "url": "https://www.openstreetmap.org/relation/13338692",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 418,
+      "name_ar": "حي المرابط",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "1f72695a817c794a741f62892b3c70c416960de38edd6edf4742d6b5395ad1e2",
+      "after_sha256": "e89910b59c514c698ce5a4fe2ac209890f4c9a32768bd5db2e373fd84ad65c46",
+      "area_change_percent": 1.2574,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13288840,
+        "url": "https://www.openstreetmap.org/relation/13288840",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 419,
+      "name_ar": "حي المزرعة",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "0b601f775c622a49e9ce6c775e6d1169e19432b4a8ec40d890e6f56263865646",
+      "after_sha256": "e9b9541d6bc43e6b5cd9d6ae98f8ec09eabd0ff5275198f90dc1f30872ffd5ff",
+      "area_change_percent": 0.2119,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338558,
+        "url": "https://www.openstreetmap.org/relation/13338558",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 420,
+      "name_ar": "حي المصانع",
+      "level": 10,
+      "parent_id": 353,
+      "before_sha256": "233a3dda291e926cc8e550da4e35f1fbebf6681eb7a440708a33e693fdab7a14",
+      "after_sha256": "eefad4fc3c0a88cbf14bf804188ee4ce64437db30095c55c571dc731e46acba9",
+      "area_change_percent": 8.9413,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13333332,
+        "url": "https://www.openstreetmap.org/relation/13333332",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 421,
+      "name_ar": "حي المصطبة",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "6fb45756b2a082c273f5ccc419dc41a285de76dd5d6d1812a3f240eec0476af3",
+      "after_sha256": "23a8c8216e4f8441840f2d09e6a36fd3945bfd632c56910294ddb286fc2646d2",
+      "area_change_percent": 8.3704,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13289444,
+        "url": "https://www.openstreetmap.org/relation/13289444",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 422,
+      "name_ar": "حي المصطفى",
+      "level": 10,
+      "parent_id": 354,
+      "before_sha256": "74231969041c187a7476eebc60465d920543202d550ed416dee63caeb66ce6c2",
+      "after_sha256": "90a5fe9884d2e55f31bf7375dfc2f0a7d53c136dcc9fa4166271644ed567c50b",
+      "area_change_percent": 15.0133,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14043059,
+        "url": "https://www.openstreetmap.org/relation/14043059",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 423,
+      "name_ar": "حي المنارة",
+      "level": 10,
+      "parent_id": 359,
+      "before_sha256": "9157442b24d1fbf9988c572e4f11f6bc6391628409b1178b61547c424075e751",
+      "after_sha256": "e170ae81baba81a0b5d394434e5b5b9789e99a6881453f09e51f0c9d78b9a67e",
+      "area_change_percent": -1.7198,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13297124,
+        "url": "https://www.openstreetmap.org/relation/13297124",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 424,
+      "name_ar": "حي النزهة",
+      "level": 10,
+      "parent_id": 359,
+      "before_sha256": "f2bb3edfb38a46eca6d830aaaad40b192b550517b14a0f50cf6434c02d7ec383",
+      "after_sha256": "f18a6dcb697793ee3fc2d64773fb5206281f58d9c32fbd35e9171c2306717181",
+      "area_change_percent": 0.2635,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13329940,
+        "url": "https://www.openstreetmap.org/relation/13329940",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 425,
+      "name_ar": "حي النضال",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "bfd7a89d22d93d27ca9e234dcd2eef4742c7c6b1bf836545bc78a3d9545483c3",
+      "after_sha256": "3e36ed9429cebd2ab180dc9661cb441052df272cb479b3bbdbbe46f13f4d6f20",
+      "area_change_percent": -9.3846,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433878,
+        "url": "https://www.openstreetmap.org/relation/13433878",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 426,
+      "name_ar": "حي النقشبندي",
+      "level": 10,
+      "parent_id": 363,
+      "before_sha256": "437b7dcf8694a8aeb6576084abf2c3f37307e274992503463630f8f8cc468750",
+      "after_sha256": "28d83557bd1fb1d20a4e2f7a36abe0e9a8893e10bebea4283550894564776aa9",
+      "area_change_percent": 14.116,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13288135,
+        "url": "https://www.openstreetmap.org/relation/13288135",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 427,
+      "name_ar": "حي الواحة",
+      "level": 10,
+      "parent_id": 365,
+      "before_sha256": "b70cc5622bf899cfcc22745165a426ad840b17a88904488da1aa9770f904aa1e",
+      "after_sha256": "f4439e5027046c10d80fe1d10a3a515d7449bdb0cb10b46f65b102c7f80cf74a",
+      "area_change_percent": -0.3645,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041923,
+        "url": "https://www.openstreetmap.org/relation/14041923",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 428,
+      "name_ar": "حي الوحدة",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "053bac0df726cea48e84d44ac554dfda2e7bc7cbfeb20310df52a6b848d52fd9",
+      "after_sha256": "5913754b2a85e2ebe0d5557c223498c6df9e6c12286f2add57cad8d1fcc14f2a",
+      "area_change_percent": 41.0505,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433879,
+        "url": "https://www.openstreetmap.org/relation/13433879",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 429,
+      "name_ar": "حي الورود",
+      "level": 10,
+      "parent_id": 361,
+      "before_sha256": "7513342cc07290ded8f742a1dc1f964ea5a6bebbf45d323714cb0f6acbadacde",
+      "after_sha256": "dd1b95760ceb42abf5b47e8aa414028fceea5c67b2502a8eb5a4fb8932447d62",
+      "area_change_percent": -31.6407,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13361542,
+        "url": "https://www.openstreetmap.org/relation/13361542",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 430,
+      "name_ar": "حي باب الجابية",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "b185c8f998ceab34acd5e0a763eb4474c67cd456c2684a4df0f4da46cd095358",
+      "after_sha256": "948af5e5d38e8c13bddef1f0c066708e4b0e39fcb03f4398ccf9d4b7575a14c1",
+      "area_change_percent": 0.5144,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384310,
+        "url": "https://www.openstreetmap.org/relation/13384310",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 431,
+      "name_ar": "حي باب توما",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "2431af64d3d5d84bab592b72b094a5976288af5a3655b778dcf8b71c99c21bdb",
+      "after_sha256": "dc15b0343decf6cd5d2f358df838a94ffdee7c030cd79310c34de51dc035d400",
+      "area_change_percent": -1.9927,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442500,
+        "url": "https://www.openstreetmap.org/relation/13442500",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 432,
+      "name_ar": "حي باب السريجة",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "d5f79518a6c06ae4168ec342ccb1c44f43fd3e44cb41819e514394eaf18550bb",
+      "after_sha256": "5831592f75f13ee74aec11d9b147ecb49d9061f8bac5e80e6e635c9f590eb870",
+      "area_change_percent": -3.9306,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384308,
+        "url": "https://www.openstreetmap.org/relation/13384308",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 433,
+      "name_ar": "حي باب شرقي",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "af525b5a9603d260caeda28c1d8b4a9f447a0fc7b2dc4cd24bbfcd6accda5266",
+      "after_sha256": "db11b56f79bf83dbdf6a6a9ad2b2d06829a0e2ea9118a6f35e35024f754407c7",
+      "area_change_percent": -1.3852,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433877,
+        "url": "https://www.openstreetmap.org/relation/13433877",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 434,
+      "name_ar": "حي باب مصر",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "e45dd25d763d2940bfe00ca1d0a8de0fbd9b552af1c2da724b28295d3c762b76",
+      "after_sha256": "7e5b2bf4b913975073901c6decfdf5fd68a4216d50f0956075d6698e93e37abc",
+      "area_change_percent": 1.4191,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14042916,
+        "url": "https://www.openstreetmap.org/relation/14042916",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 435,
+      "name_ar": "حي برزة البلد",
+      "level": 10,
+      "parent_id": 359,
+      "before_sha256": "ec9733494a22ec1b5a34df0dfa05d173d24019e2f184ff8fbbfcf19e6123665f",
+      "after_sha256": "8a404cb399a329292fa398515e79638b2ee7957426361616bdf84a16e04cd55f",
+      "area_change_percent": 15.4473,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13329938,
+        "url": "https://www.openstreetmap.org/relation/13329938",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 436,
+      "name_ar": "حي تشرين",
+      "level": 10,
+      "parent_id": 353,
+      "before_sha256": "7fc77c95a0ff1d288cdf6957b544e6c69734db6d8f9851520a662b0983c0b0cd",
+      "after_sha256": "0e1536bd5e5c64281b51aec7876698c24483e0d048c85cc965cbbd9523f1ae2c",
+      "area_change_percent": 57.2119,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13333330,
+        "url": "https://www.openstreetmap.org/relation/13333330",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 437,
+      "name_ar": "حي جوبر الشرقي",
+      "level": 10,
+      "parent_id": 360,
+      "before_sha256": "fba6a3c08037606ca3afabd366026d452ddc2fff4a4b2bfc3a255a778be2741c",
+      "after_sha256": "def061a228151e625d517780b4a32e87f884332d698eeb6f4d2f33d01c09c8b5",
+      "area_change_percent": -14.6166,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13438164,
+        "url": "https://www.openstreetmap.org/relation/13438164",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 438,
+      "name_ar": "حي جوبر الغربي",
+      "level": 10,
+      "parent_id": 360,
+      "before_sha256": "5649181e6e293a2727ab94a2e739fbde9684863f7e94081c095adf78938f2658",
+      "after_sha256": "8bac5b9660cd4d03e4f1865d0bc0b9b8f175f12c592c7b4b5bbd0ef749b6aa77",
+      "area_change_percent": 39.1533,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13438167,
+        "url": "https://www.openstreetmap.org/relation/13438167",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 439,
+      "name_ar": "حي الشريباتي",
+      "level": 10,
+      "parent_id": 354,
+      "before_sha256": "705c14974ff97ebcacd788d3ecd4b85521115419a60dce8243876c6b124e080c",
+      "after_sha256": "5cab3f8929b712dccb6e8af73b2a361b4997502f76ca036670ec4eacaedeaf1a",
+      "area_change_percent": 1.3914,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14043003,
+        "url": "https://www.openstreetmap.org/relation/14043003",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 440,
+      "name_ar": "حي حطين",
+      "level": 10,
+      "parent_id": 350,
+      "before_sha256": "eab7ec0400a59046c5ba42765aeb3be5c1be21d8e3f3e264af580bcf3fadf4c6",
+      "after_sha256": "c0c6a8376efbdddcb4ec94d259f11892dfc18ed6aba2e495d9df410efb5026a9",
+      "area_change_percent": 15.6721,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 15775457,
+        "url": "https://www.openstreetmap.org/relation/15775457",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 441,
+      "name_ar": "حي دمر الشرقية",
+      "level": 10,
+      "parent_id": 361,
+      "before_sha256": "9b8fc95ecde26bc9bc435a97d280bd8ebe36a33ea78076df38584550b1327631",
+      "after_sha256": "e6f18915b6acb50afa02ca7350b688e9697dbad2fdc76a5ca9914ec10602296f",
+      "area_change_percent": 2.6081,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13334691,
+        "url": "https://www.openstreetmap.org/relation/13334691",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 442,
+      "name_ar": "حي دمر الغربية",
+      "level": 10,
+      "parent_id": 361,
+      "before_sha256": "1309bac4438a3d971071953ec504ac09ada7040054907706b5e72a51cd6a6125",
+      "after_sha256": "0d9ae743b1ce3af53d92e550ab3b22ed20d56c7fcbdb8a802b102b317a179f4d",
+      "area_change_percent": 42.4884,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13360832,
+        "url": "https://www.openstreetmap.org/relation/13360832",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 443,
+      "name_ar": "حي روضة الميدان",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "adfe662ce361c237b61ee91ddb3f9495aa6fbac2e10aa1f7eb483d51df06bb66",
+      "after_sha256": "d5eeb8514d905eda9b3e64d4cac0c0178f78b9542b0db20931f5dba89e273e75",
+      "area_change_percent": -3.2583,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433881,
+        "url": "https://www.openstreetmap.org/relation/13433881",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 444,
+      "name_ar": "حي ساروجة",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "b8682f2893a83f8609aa359c2dcbbe4ab50ba60e3e1200f81494746b6d01b768",
+      "after_sha256": "606aac0cbeff4d9bb77c5a1bf1c18116f10422ede20743a6e95b91f0666789a6",
+      "area_change_percent": 7.2176,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338932,
+        "url": "https://www.openstreetmap.org/relation/13338932",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 445,
+      "name_ar": "حي شاغور براني",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "fd4086f7099a578e7e21a449f2b414c4b28e6e5d8fde50495aadc21268a90363",
+      "after_sha256": "47b913f3c3c84965d152268a17c493478d6483b9d2aa9343ee32a2fce1f22feb",
+      "area_change_percent": -1.1434,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433885,
+        "url": "https://www.openstreetmap.org/relation/13433885",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 446,
+      "name_ar": "حي شاغور جواني",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "67314a9d4c97c42498a5ee682b584e6a971defcbfbdb31e62788b6fbaf0bcf57",
+      "after_sha256": "f552937fdfbc2e952e3509d735d2f324962f65d80798c8dfff1e682902c449d7",
+      "area_change_percent": -1.1399,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442503,
+        "url": "https://www.openstreetmap.org/relation/13442503",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 447,
+      "name_ar": "حي شورى",
+      "level": 10,
+      "parent_id": 357,
+      "before_sha256": "ac5a818f6758ebbaa0dcfe15b747a865648e30d262c70bf9b5656a313218c355",
+      "after_sha256": "a6cdf214f08e9451353cba8a72ff69a5c06ca637d52b3c7b5a3b29ea890f87dc",
+      "area_change_percent": -5.9202,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13289445,
+        "url": "https://www.openstreetmap.org/relation/13289445",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 448,
+      "name_ar": "حي الحرية _ عش الورور",
+      "level": 10,
+      "parent_id": 359,
+      "before_sha256": "290e8cbee1d39466b482f75ff71d490dc2f876e31a274f4ce7d1ccf1fbbb7872",
+      "after_sha256": "d22aa8f2e3f7748a7fb7b74799bcf484069fb8f2b777eea64fe2bc6c41ac8c3d",
+      "area_change_percent": 372.5654,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13298994,
+        "url": "https://www.openstreetmap.org/relation/13298994",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 449,
+      "name_ar": "حي فارس الخوري",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "4205f1a6931dcf375ff261fdeff5c5ceb93d8240cec04af0e59fd31c9d7f589e",
+      "after_sha256": "def28a91b3ed91aa46974beccb3955e0ef044b256cba8d2214ce9aba956d3053",
+      "area_change_percent": -0.014,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13337448,
+        "url": "https://www.openstreetmap.org/relation/13337448",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 450,
+      "name_ar": "حي فيلات شرقية",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "959f357f898f6870344119197dbfdb0fac8848228bef61d4689cf74e8ca197b6",
+      "after_sha256": "34788e5c70ddc10c4bb25949234fba50a103032c57d9a21915924dd1990f8607",
+      "area_change_percent": -0.2777,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13359356,
+        "url": "https://www.openstreetmap.org/relation/13359356",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 451,
+      "name_ar": "حي فيلات غربية",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "5f1bdbb7c840fd8d05e313fa27e8e780c5cc8a58a04f3419300cb6b18f60ff56",
+      "after_sha256": "9cbaf5e5ec1df849235ed2d82494c0b33d44f6562c90f990eecb509859210625",
+      "area_change_percent": 9.8102,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13359357,
+        "url": "https://www.openstreetmap.org/relation/13359357",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 452,
+      "name_ar": "حي قاسيون",
+      "level": 10,
+      "parent_id": 363,
+      "before_sha256": "421c490aff781b6bb844e13dc3178cb983113adac8d17cd85582a33d245eba17",
+      "after_sha256": "df59c4f80862e62fc7a77a90bc555b69b09ef3f5a2db87d6f657e17105cf1b55",
+      "area_change_percent": 5.7378,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13334690,
+        "url": "https://www.openstreetmap.org/relation/13334690",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 453,
+      "name_ar": "حي قبر عاتكة",
+      "level": 10,
+      "parent_id": 355,
+      "before_sha256": "56e7a2ed2df930ef189f74cd9623d9ef03045fa716e8bd98bedd65f4fba62c06",
+      "after_sha256": "463a091b1a4e0941b8ee9fc46d6f6582633bf7493287fd4b7f52b35d66b98338",
+      "area_change_percent": -0.4803,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13384307,
+        "url": "https://www.openstreetmap.org/relation/13384307",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 454,
+      "name_ar": "حي كفرسوسة البلد",
+      "level": 10,
+      "parent_id": 365,
+      "before_sha256": "27d8747cc7612c45bfca63baaa6884c9705d150806f33acf9ab3b06f53f00f81",
+      "after_sha256": "e3990c430e58d041f6c647ed223514fd89ff84213927efa924bab261c380e6fa",
+      "area_change_percent": 0.3636,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041924,
+        "url": "https://www.openstreetmap.org/relation/14041924",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 455,
+      "name_ar": "حي مأذنة الشحم",
+      "level": 10,
+      "parent_id": 362,
+      "before_sha256": "55c456df6d1c2f0b3fabccb50dff104fff3c0f5beda5e142cdd7ec90b59125b6",
+      "after_sha256": "f8f527a7758ee596a76c350bed3e8fbd94be1802087d89b573cd3652b2254df0",
+      "area_change_percent": 0.0289,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13442502,
+        "url": "https://www.openstreetmap.org/relation/13442502",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 456,
+      "name_ar": "حي مزة 86",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "3e3a3b02fe300c646c40bf04e381bad8c44f6b30d0fbcdfec8e78f66c52b5441",
+      "after_sha256": "24f7ac2cbe337b755af2f61a0b2b30d17907cf26e0fbac1f0d21b895ec4c16d5",
+      "area_change_percent": -1.0566,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13360458,
+        "url": "https://www.openstreetmap.org/relation/13360458",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 457,
+      "name_ar": "حي المزة القديمة",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "c7cf1ca99c0443ffd9ade0975ccbc4f0c476be765626ca0f1a00aee4a1acebde",
+      "after_sha256": "0b71de38eeff23b71eba836e1e9fc3548edaa629522b6c163de868d10bc46031",
+      "area_change_percent": 0.2267,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13359473,
+        "url": "https://www.openstreetmap.org/relation/13359473",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 458,
+      "name_ar": "حي مزة بساتين",
+      "level": 10,
+      "parent_id": 365,
+      "before_sha256": "fbb2fd3614ad9479b9211d86c5b57b6ecaa8205d53b589f2f40c207cfee45b2c",
+      "after_sha256": "59380975f928abfe163945d897548ea7da7aeace1eb3a6ce156fde89568a63dd",
+      "area_change_percent": 6.6653,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041926,
+        "url": "https://www.openstreetmap.org/relation/14041926",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 459,
+      "name_ar": "حي مزة جبل",
+      "level": 10,
+      "parent_id": 356,
+      "before_sha256": "da0aea7863f5eea0702eb6721121cc7a40cada4e3489b7551f1a1f980b2dee9b",
+      "after_sha256": "da821b3517e3d0c97525f31b0fa6036e89e648a5bd1afea49a27eba4959b93b5",
+      "area_change_percent": 2.9273,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13360457,
+        "url": "https://www.openstreetmap.org/relation/13360457",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 460,
+      "name_ar": "حي مساكن برزة",
+      "level": 10,
+      "parent_id": 359,
+      "before_sha256": "0a7a196bf64da1fff467d827005ae975508c8ebe3ae15169c60db5d960abec01",
+      "after_sha256": "3fefde6d252c41c876534389d5e086af409ada10ba512c90fb82b06bea9cf1c8",
+      "area_change_percent": -1.208,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13329939,
+        "url": "https://www.openstreetmap.org/relation/13329939",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 461,
+      "name_ar": "حي مسجد الأقصاب",
+      "level": 10,
+      "parent_id": 364,
+      "before_sha256": "0da459f544dd62b9524e14ed9a95b29dffadf32c0603bbae5727513ca9a3d12e",
+      "after_sha256": "41395983e9b507ae89a47daf8cf4257ea815de28077e3aea7a1f5d672dd0fcdf",
+      "area_change_percent": 1.2719,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13338934,
+        "url": "https://www.openstreetmap.org/relation/13338934",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 462,
+      "name_ar": "حي ضاحية دمر",
+      "level": 10,
+      "parent_id": 352,
+      "before_sha256": "c2bce4ce985b64baa24846d715692af5a70e5284ed12cc69da2ace3d349acfab",
+      "after_sha256": "a6fc6fa2560cc3f69c66fc2f87a9fb8c7fb2561eb261b9df25e528a58e96f24e",
+      "area_change_percent": 16.6427,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13360833,
+        "url": "https://www.openstreetmap.org/relation/13360833",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 463,
+      "name_ar": "حي التضامن",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "71255e7d1057a1e69609d73520f61bb69eae011dea27ed9a84bec011fea24a68",
+      "after_sha256": "aee3bc2324f28b854574c8409d07d4d6369e655b86111f49efb7d78468b36504",
+      "area_change_percent": 11.6988,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433884,
+        "url": "https://www.openstreetmap.org/relation/13433884",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 464,
+      "name_ar": "حي بلال",
+      "level": 10,
+      "parent_id": 351,
+      "before_sha256": "667e3d7d95313522325e0f425cab69340e8011a722829444d705ca552be9e712",
+      "after_sha256": "677de661a26b25a6c6293f2644193b77ec961f35bc0b421f2ed08d66bcbb01f4",
+      "area_change_percent": 10.9677,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 13433880,
+        "url": "https://www.openstreetmap.org/relation/13433880",
+        "snapshot": "2026-10-29T05:55:37Z",
+        "trimmed_to_current_neighbors": false
+      }
+    },
+    {
+      "id": 465,
+      "name_ar": "حي الزاهرة",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "ab91090fd67f5ede36b8e723d4ccbfefb941c6f6501c53d109895321f7c4151b",
+      "after_sha256": "974435df36702fec2e42c02da3cd7b79ca6aa12411f8c780574467f95f659644",
+      "area_change_percent": 0.2491,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041957,
+        "url": "https://www.openstreetmap.org/relation/14041957",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": true
+      }
+    },
+    {
+      "id": 466,
+      "name_ar": "حي ميدان وسطاني",
+      "level": 10,
+      "parent_id": 358,
+      "before_sha256": "7c6a29e1346f0bcc82f2e8ad53ac1031caf63c147bee4381caa790af2ce4598d",
+      "after_sha256": "c3d2391b126af3ff7d57846dc69d848e62d0cb4034665c9e0036c74d084ad797",
+      "area_change_percent": 0.6579,
+      "source": {
+        "type": "osm_relation",
+        "relation_id": 14041956,
+        "url": "https://www.openstreetmap.org/relation/14041956",
+        "snapshot": "2025-01-01T00:00:00Z",
+        "trimmed_to_current_neighbors": false
+      }
+    }
+  ]
+}

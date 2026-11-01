@@ -1,7 +1,17 @@
 from django.urls import path
 from . import views
 from . import tile_views
+from . import management_api
+from . import submission_api
 urlpatterns = [
+    path('place-submissions/metadata/', submission_api.SubmissionMetadata.as_view()),
+    path('place-submissions/', submission_api.SubmitPlace.as_view()),
+    path('admin/places/metadata/', management_api.metadata),
+    path('admin/places/geojson/', management_api.map_places),
+    path('admin/places/', management_api.PlaceList.as_view()),
+    path('admin/places/<int:pk>/', management_api.PlaceDetail.as_view()),
+   
+    path('streets/geojson/', views.list_streets_geojson, name='streets_geojson'),
     # التقسيمات الإدارية المعتمدة
     path('admin-areas/', views.list_admin_areas_geojson, name='admin_areas_geojson'),
     
@@ -10,6 +20,7 @@ urlpatterns = [
     
     # نقاط الأماكن والمنشآت للطبقات (GeoJSON)
     path('places/geojson/', views.list_places_geojson, name='places_geojson'),
+    path('places/sectors/', views.list_place_sectors, name='place_sectors'),
     
     # تفاصيل منشأة محددة (Market Card)
     path('places/<int:place_id>/', views.get_place_detail, name='place_detail'),

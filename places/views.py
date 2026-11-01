@@ -3,6 +3,7 @@ import json
 import re
 from django.http import JsonResponse, Http404
 from django.views.decorators.http import require_GET
+from django.views.decorators.cache import never_cache
 from django.db.models import Q
 from .models import (
     AdminArea, Street, Category, SubCategory, Place, PlaceMedia, Notification,
@@ -10,6 +11,8 @@ from .models import (
 )
 from .contacts import serialize_contact, sector_label
 from .text_utils import normalize_arabic, generate_search_variants
+from .management_api import filtered_places
+from rest_framework.exceptions import ValidationError
 
 
 def haversine_distance_km(lat1, lon1, lat2, lon2):
@@ -74,6 +77,57 @@ def list_admin_areas_geojson(request):
 
 
 @require_GET
+def list_place_sectors(request):
+    """Return the sectors represented by places in a subcategory."""
+    subcategory = request.GET.get('subcategory', '').strip()
+    category = request.GET.get('category', '').strip()
+    if not subcategory:
+        return JsonResponse({"results": []})
+
+    queryset = Place.objects.filter(is_visible=True, sub_category__slug=subcategory)
+    if category:
+        queryset = queryset.filter(sub_category__category__slug=category)
+    sectors = queryset.values_list('sector', flat=True).distinct()
+    results = [
+        {"slug": sector.lower(), "label": sector_label(sector)}
+        for sector in sectors
+        if sector
+    ]
+    return JsonResponse({"results": results})
+
+
+@require_GET
+def list_streets_geojson(request):
+    """Serve active street geometry and names from PostgreSQL for map rendering."""
+    features = []
+    for street in Street.objects.filter(is_active=True).iterator():
+        highway = street.highway_type or 'residential'
+        road_class = highway.removesuffix('_link')
+        if road_class in {'residential', 'unclassified', 'living_street', 'road'}:
+            road_class = 'minor'
+        elif road_class in {'footway', 'cycleway', 'pedestrian', 'steps', 'bridleway'}:
+            road_class = 'path'
+        features.append({
+            'type': 'Feature',
+            'id': street.id,
+            'properties': {
+                'id': street.id,
+                'name': street.name_ar or street.name_en,
+                'name:ar': street.name_ar or street.name_en,
+                'name:latin': street.name_en,
+                'name_ar': street.name_ar,
+                'name_en': street.name_en,
+                'highway_type': highway,
+                'class': road_class,
+                'ramp': int(highway.endswith('_link')),
+                'admin_area_id': street.admin_area_id,
+            },
+            'geometry': street.geometry,
+        })
+    return JsonResponse({'type': 'FeatureCollection', 'count': len(features), 'features': features})
+
+
+@require_GET
 def list_categories(request):
     """
     إرجاع قائمة تصنيفات الطبقات (مشافي، مدارس، مباني حكومية...) مع عدد الأماكن
@@ -87,15 +141,15 @@ def list_categories(request):
             "name_ar": cat.name_ar,
             "name_en": cat.name_en,
             "icon": cat.icon,
-            "color": cat.color,
+            "sort_order": cat.sort_order,
             "places_count": cat.places.filter(is_visible=True).count(),
             "subcategories": [
                 {
                     "id": sub.id,
                     "slug": sub.slug,
                     "name_ar": sub.name_ar,
+                    "name_en": sub.name_en,
                     "icon": sub.effective_icon,
-                    "color": sub.effective_color,
                 }
                 for sub in cat.subcategories.all()
             ]
@@ -114,6 +168,7 @@ PERMANENT_LANDMARK_IDS = {
 
 
 @require_GET
+@never_cache
 def list_places_geojson(request):
     """
     إرجاع نقاط الأماكن والمنشآت بصيغة GeoJSON لطبقات الخريطة النشطة
@@ -125,7 +180,6 @@ def list_places_geojson(request):
     """
     cat_param = request.GET.get('categories')
     subcat_param = request.GET.get('subcategories')
-    admin_id = request.GET.get('admin_area_id')
     include_permanent = request.GET.get('include_permanent', '0') == '1'
     try:
         limit = int(request.GET.get('limit', 1500))
@@ -151,11 +205,13 @@ def list_places_geojson(request):
         if sub_slugs:
             queryset = queryset.filter(sub_category__slug__in=sub_slugs)
 
-    if admin_id:
-        try:
-            queryset = queryset.filter(admin_area_id=int(admin_id))
-        except ValueError:
-            pass
+    try:
+        # Public callers cannot override publication visibility.
+        params = request.GET.copy()
+        params.pop('is_visible', None)
+        queryset = filtered_places(params, queryset)
+    except ValidationError as exc:
+        return JsonResponse(exc.detail, status=400)
 
     queryset = queryset[:limit]
 
@@ -176,7 +232,7 @@ def list_places_geojson(request):
                 "category_slug": p.category.slug if p.category else "",
                 "category_name": p.category.name_ar if p.category else "",
                 "category_icon": p.category.icon if p.category else "map-pin",
-                "category_color": p.category.color if p.category else "#064239",
+                "category_color": getattr(p.category, 'color', '#064239') if p.category else "#064239",
                 "sub_category_slug": p.sub_category.slug if p.sub_category else "",
                 "sub_category_name": p.sub_category.name_ar if p.sub_category else "",
                 "sub_category_icon": p.sub_category.effective_icon if p.sub_category else "map-pin",
@@ -200,12 +256,13 @@ def list_places_geojson(request):
 
 
 @require_GET
+@never_cache
 def get_place_detail(request, place_id):
     """
     إرجاع التفاصيل الكاملة لمكان محدد لعرضها في بطاقة المنشأة (Market Card)
     """
     try:
-        p = Place.objects.select_related('sub_category__category', 'admin_area__parent').prefetch_related('media', 'communication_info').get(id=place_id)
+        p = Place.objects.select_related('sub_category__category', 'admin_area__parent').prefetch_related('media', 'communication_info').get(id=place_id, is_visible=True)
     except Place.DoesNotExist:
         raise Http404("المكان غير موجود")
 
@@ -235,7 +292,7 @@ def get_place_detail(request, place_id):
             "name_ar": p.category.name_ar if p.category else "",
             "slug": p.category.slug if p.category else "",
             "icon": p.category.icon if p.category else "map-pin",
-            "color": p.category.color if p.category else "#064239",
+            "color": getattr(p.category, 'color', '#064239') if p.category else "#064239",
         },
         "sub_category": {
             "name_ar": p.sub_category.name_ar if p.sub_category else "",
@@ -392,7 +449,7 @@ def search_all(request):
             "title": p.title_ar,
             "subtitle": f"{p.category.name_ar if p.category else ''} • {p.admin_area.name_ar if p.admin_area else 'دمشق'}",
             "icon": p.category.icon if p.category else "map-pin",
-            "color": p.category.color if p.category else "#064239",
+            "color": getattr(p.category, 'color', '#064239') if p.category else "#064239",
             "coordinates": [p.longitude, p.latitude],
             "category_slug": p.category.slug if p.category else "",
         })

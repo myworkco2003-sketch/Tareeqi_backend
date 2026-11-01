@@ -308,7 +308,7 @@ class Command(BaseCommand):
         if pharmacy:
             pharmacy.description = "صيدلية مناوبة تقدم كامل الاستشارات الدوائية والمستحضرات الطبية وحليب الأطفال والمستلزمات الصحية."
             pharmacy.sector = "private"
-            pharmacy.location_text = "ساحة عرنوس - مقابل جامع الرئيس"
+            pharmacy.location_text = "ساحة عرنوس - مقابل جامع "
             save_contact_values(pharmacy, phone="011-3345566")
             save_contact_values(pharmacy, whatsapp="0966334556")
             pharmacy.opening_hours = {"hours": "24/7", "description": "خدمة صيدلانية مناوبة على مدار الساعة طيلة أيام الأسبوع"}

@@ -5338,7 +5338,7 @@
             "type": "Feature",
             "properties": {
                 "id": 352,
-                "name_ar": "شارع الرئيس",
+                "name_ar": "شارع تعديل",
                 "name_en": "",
                 "highway_type": "unclassified",
                 "neighborhood": "حي الشهداء",
@@ -12312,7 +12312,7 @@
             "type": "Feature",
             "properties": {
                 "id": 80,
-                "name_ar": "ساحة باسل الأسد",
+                "name_ar": "ساحة الربوة",
                 "name_en": "",
                 "highway_type": "primary",
                 "neighborhood": "حي الربوة",
@@ -14592,7 +14592,7 @@
             "type": "Feature",
             "properties": {
                 "id": 218,
-                "name_ar": "شارع باسل الأسد",
+                "name_ar": "شارع الحجاز",
                 "name_en": "",
                 "highway_type": "primary",
                 "neighborhood": "حي الحجاز",

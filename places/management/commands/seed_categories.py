@@ -15,13 +15,14 @@ class Command(BaseCommand):
         path = Path(__file__).resolve().parents[2] / 'data' / 'categories.json'
         data = json.loads(path.read_text(encoding='utf-8'))
         categories_created = subcategories_created = subcategory_count = 0
-        for position, entry in enumerate(data):
+        for entry in data:
             category, created = Category.objects.update_or_create(
                 slug=entry['slug'],
                 defaults={
                     'name_ar': entry['name_ar'],
+                    'name_en': entry['name_en'],
                     'icon': entry['icon'],
-                    'sort_order': position,
+                    'sort_order': entry['sort_order'],
                     'is_active': True,
                 },
             )
@@ -30,7 +31,10 @@ class Command(BaseCommand):
                 _, created = SubCategory.objects.update_or_create(
                     category=category,
                     slug=sub['slug'],
-                    defaults={'name_ar': sub['name_ar']},
+                    defaults={
+                        'name_ar': sub['name_ar'],
+                        'name_en': sub['name_en'],
+                    },
                 )
                 subcategories_created += created
                 subcategory_count += 1
